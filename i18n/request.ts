@@ -2,15 +2,16 @@ import { getRequestConfig } from "next-intl/server"
 import { routing } from "./routing"
 
 export default getRequestConfig(async ({ locale }) => {
-  // Use the requested locale if it's valid, otherwise fall back to the default
-  const validLocale: string = (routing.locales as readonly string[]).includes(
-    locale
-  )
-    ? locale
+  const currentLocale = locale || routing.defaultLocale
+
+  // Ensure that the locale is valid, or fallback to the default
+  const locales = routing.locales as unknown as string[]
+  const finalLocale = locales.includes(currentLocale)
+    ? currentLocale
     : routing.defaultLocale
 
   return {
-    locale: validLocale,
-    messages: (await import(`../messages/${validLocale}.json`)).default,
+    locale: finalLocale,
+    messages: (await import(`../messages/${finalLocale}.json`)).default,
   }
 })

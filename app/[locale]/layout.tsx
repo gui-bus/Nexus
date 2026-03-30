@@ -1,9 +1,11 @@
 import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
-import { getLocale, getMessages } from "next-intl/server"
+import { getMessages } from "next-intl/server"
+import { notFound } from "next/navigation"
+import { routing } from "@/i18n/routing"
 
-import "./globals.css"
+import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site"
@@ -38,11 +40,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Guilherme Bustamante",
-      url: "https://guilhermebustamante.com",
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
   ],
-  creator: "Guilherme Bustamante",
+  creator: siteConfig.name,
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -76,10 +78,20 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode
+  params: Promise<{ locale: string }>
 }>) {
-  const locale = await getLocale()
+  const { locale } = await params
+
+  // Ensure that the incoming `locale` is valid
+  if (!(routing.locales as readonly string[]).includes(locale)) {
+    notFound()
+  }
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
   const messages = await getMessages()
 
   return (

@@ -3,7 +3,6 @@
 import { useLocale } from "next-intl"
 import ReactCountryFlag from "react-country-flag"
 import { Button } from "@/components/ui/button"
-import { useRouter, usePathname } from "@/i18n/routing"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,22 +13,22 @@ import { CaretDown } from "@phosphor-icons/react"
 
 export function LanguageSwitcher() {
   const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
 
-  const handleLanguageChange = (nextLocale: "pt" | "en") => {
+  const handleLanguageChange = (nextLocale: string) => {
     if (nextLocale === locale) return
 
-    // Using the customized useRouter from @/i18n/routing handles the
-    // locale change even when prefix is 'never' by updating the cookie
-    // and performing a refresh.
-    router.push(pathname, { locale: nextLocale })
+    // For prefix-less routing, manual cookie setting + reload is the most reliable method
+    // eslint-disable-next-line react-hooks/immutability
+    document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000`
+
+    // Force a full reload to ensure the server-side locale state is updated
+    window.location.reload()
   }
 
   const languages = [
     { code: "pt", name: "Português", countryCode: "BR" },
     { code: "en", name: "English", countryCode: "US" },
-  ] as const
+  ]
 
   const currentLanguage =
     languages.find((lang) => lang.code === locale) || languages[0]
@@ -60,7 +59,7 @@ export function LanguageSwitcher() {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => handleLanguageChange(lang.code)}
+            onSelect={() => handleLanguageChange(lang.code)}
             className="flex cursor-pointer items-center gap-3"
           >
             <ReactCountryFlag

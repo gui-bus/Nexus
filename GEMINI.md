@@ -11,6 +11,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **ENV VALIDATION:** All environment variables MUST be defined in `src/config/env.ts` and validated via Zod.
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
 - **CI/CD:** All changes MUST pass the GitHub Actions pipeline (Lint, Typecheck, i18n Sync, Build).
+- **QUALITY GATE:** A Husky `pre-push` hook is active and will run `pnpm build` automatically. NEVER bypass this gate.
 
 ### 2. Code Style & Documentation
 - **NO COMMENTS:** NEVER include comments in the source code. The code must be self-explanatory through clean naming and structure.
@@ -41,6 +42,7 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
+- **AUDIT:** Run `pnpm audit` periodically to check SEO, Accessibility, and Performance across all routes.
 - **DEPLOYMENT:** Use the provided `Dockerfile` (multi-stage) for production. Ensure `output: "standalone"` is enabled in `next.config.mjs`.
 
 ## Main Technologies
@@ -51,11 +53,13 @@ This project is a high-performance, production-ready Landing Page template utili
 - **Validation:** Zod
 - **CI/CD:** GitHub Actions
 - **Containerization:** Docker
+- **Auditing:** Unlighthouse (Lighthouse)
 
 ## Scripts
 - `pnpm dev`: Development server.
 - `pnpm build`: Production build (includes i18n check).
 - `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
+- `pnpm audit`: Run Lighthouse audit on all routes.
 - `pnpm lint`: Code quality check.
 - `pnpm typecheck`: Strict type verification.

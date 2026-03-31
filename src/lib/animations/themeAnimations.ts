@@ -6,7 +6,12 @@ export type AnimationStart =
   | "bottom-right"
   | "center"
 
-export function createAnimation() {
+interface AnimationResult {
+  css: string
+  name: string
+}
+
+export function createAnimation(): AnimationResult {
   const css = `
     ::view-transition-old(root),
     ::view-transition-new(root) {

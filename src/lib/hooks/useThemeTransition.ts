@@ -2,10 +2,16 @@ import { useTheme } from "next-themes"
 import { useCallback, useEffect } from "react"
 import { createAnimation } from "../animations/themeAnimations"
 
-export function useThemeTransition() {
+interface UseThemeTransition {
+  theme: string | undefined
+  resolvedTheme: string | undefined
+  toggleTheme: () => void
+}
+
+export function useThemeTransition(): UseThemeTransition {
   const { theme, setTheme, resolvedTheme } = useTheme()
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = useCallback((): void => {
     if (typeof window === "undefined") return
 
     const animation = createAnimation()
@@ -34,7 +40,7 @@ export function useThemeTransition() {
   }, [theme, resolvedTheme, setTheme])
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
       if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "t") {
         e.preventDefault()
         toggleTheme()

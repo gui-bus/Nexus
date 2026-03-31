@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl"
 import { cn } from "@/src/lib/utils/utils"
 import { useThemeTransition } from "@/src/lib/hooks/useThemeTransition"
 
-export function ThemeToggle() {
+export function ThemeToggle(): React.JSX.Element {
   const t = useTranslations("ThemeToggle")
   const { resolvedTheme, toggleTheme } = useThemeTransition()
   const [mounted, setMounted] = React.useState(false)

@@ -1,43 +1,51 @@
-# Project Overview
-This is a professional, production-ready Landing Page template utilizing the Next.js App Router (v16+), React 19, and Tailwind CSS v4. It features a centralized configuration, optimized SEO, multi-language support (next-intl), and high-performance assets.
+# Landing Page Template - Development Manual
+
+This project is a high-performance, production-ready Landing Page template utilizing the Next.js App Router (v16+), React 19, and Tailwind CSS v4. Adhere strictly to these mandates.
+
+## Core Mandates
+
+### 1. Technical Integrity & Typing
+- **STRICT TYPES:** `any` is strictly FORBIDDEN. Use `unknown` or specific interfaces/types.
+- **EXPLICIT RETURNS:** All functions and React components MUST have explicit return types.
+- **TS-STRICT:** Maintain `strict: true` in `tsconfig.json` at all times.
+- **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
+
+### 2. Code Style & Documentation
+- **NO COMMENTS:** NEVER include comments in the source code. The code must be self-explanatory through clean naming and structure.
+- **NAMING:** Use descriptive, camelCase for variables/functions and PascalCase for components.
+- **SURGICAL UPDATES:** Apply minimal, targeted changes. Avoid unrelated refactoring.
+
+### 3. Internationalization (next-intl)
+- **UI TEXT:** NEVER hardcode strings in components. All user-facing text must be retrieved via `useTranslations` (client) or `getTranslations` (server).
+- **METADATA:** Use `generateMetadata` in `layout.tsx` or `page.tsx` for locale-aware SEO.
+- **KEYS:** Maintain the structure in `messages/*.json`. Group keys logically (e.g., `Index`, `Locale`, `Config`).
+
+### 4. Styling (Tailwind CSS v4)
+- **BRANDING:** Prefer using centralized brand variables defined in `globals.css` (e.g., `text-brand-primary`, `bg-brand-secondary`).
+- **COLORS:** Use `oklch` for all custom color definitions for better accessibility and vibrancy.
+- **DESIGN SYSTEM:**
+  - **Corners:** Use `rounded-full` for small interactive elements (triggers) and `rounded-2xl` for containers/menus.
+  - **Effects:** Use `backdrop-blur-sm` (or `xl`) for overlays and dropdowns.
+  - **Minimalism:** Keep the UI clean, with subtle borders (`border-border/60`) and neutral backgrounds.
+
+### 5. Architectural Standards
+- **PATH ALIASES:** Always use `@/` for root-relative imports (e.g., `@/src/components/...`).
+- **COMPONENT LOCATION:** 
+  - `src/components/ui/`: Base shadcn/ui components.
+  - `src/components/common/`: Shared, high-level components (Switchers, Toggles).
+  - `src/app/`: Routes, layouts, and global styles.
+- **HOOKS & UTILS:** Place business logic in `src/lib/hooks/` and pure functions in `src/lib/utils/`.
 
 ## Main Technologies
-- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
-- **Library:** [React 19](https://react.dev/)
-- **Internationalization:** [next-intl](https://next-intl-docs.vercel.app/) (Prefix-less routing)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **Components:** [shadcn/ui](https://ui.shadcn.com/)
-- **Icons:** [Phosphor Icons](https://phosphoricons.com/)
-- **Theme:** [next-themes](https://github.com/pacocoursey/next-themes)
+- **Framework:** Next.js 16 (App Router)
+- **Library:** React 19
+- **i18n:** next-intl (Prefix-less routing)
+- **Styling:** Tailwind CSS v4
+- **Icons:** Phosphor Icons
+- **Theme:** next-themes
 
-## Core Features
-- **Centralized Config:** Manage site name, description, SEO, and social links in `config/site.ts`.
-- **SEO & Metadata:** Pre-configured Metadata API, `sitemap.ts`, and `robots.ts`.
-- **Internationalization (i18n):** Support for English and Portuguese without URL prefixes, using cookies for persistence.
-- **Performance:** Optimized fonts (Montserrat, Outfit, Geist), automatic sitemaps, and strict build validation.
-
-## Building and Running
-The project uses **pnpm** as the preferred package manager.
-
-- **Development:** `pnpm dev`
-- **Build:** `pnpm build`
-- **Start:** `pnpm start`
-- **Lint:** `pnpm lint`
-- **Typecheck:** `pnpm typecheck`
-
-## Project Structure
-- `app/`: Routes, layouts, SEO (robots/sitemap), and global styles.
-- `config/`: Site-wide configuration (`site.ts`).
-- `i18n/`: Internationalization routing and request configuration.
-- `messages/`: Translation JSON files.
-- `components/`: UI and shared components (including `LanguageSwitcher`).
-- `lib/`: Utility functions.
-
-## Development Conventions
-- **Internationalization:** Use `useTranslations` from `next-intl` for all UI text.
-- **Metadata:** Update `siteConfig` in `config/site.ts` for project-specific SEO.
-- **Path Aliases:** Use `@/` for root references.
-- **Class Merging:** Use the `cn` utility.
-- **No Comments:** NEVER include comments in the code.
-- **Git Hooks (Husky):** Pre-commit linting and commit message validation.
-- **Validation:** Always run `pnpm build` before committing.
+## Scripts
+- `pnpm dev`: Development server.
+- `pnpm build`: Production build (MANDATORY before commit).
+- `pnpm lint`: Code quality check.
+- `pnpm typecheck`: Strict type verification.

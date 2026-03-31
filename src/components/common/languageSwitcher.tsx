@@ -25,7 +25,7 @@ const flagCodes: Record<string, string> = {
   fr: "FR",
 }
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher(): React.JSX.Element {
   const t = useTranslations("Locale")
   const currentLocale = useLocale()
   const router = useRouter()
@@ -38,7 +38,7 @@ export function LanguageSwitcher() {
     return () => cancelAnimationFrame(timer)
   }, [])
 
-  const handleLocaleChange = (newLocale: string) => {
+  const handleLocaleChange = (newLocale: string): void => {
     if (newLocale === currentLocale) return
     Cookies.set("NEXT_LOCALE", newLocale, { expires: 365 })
     router.refresh()

@@ -71,7 +71,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>): Promise<React.JSX.Element> {
   const locale = await getLocale()
   const messages = await getMessages()
   const t = await getTranslations("Config")

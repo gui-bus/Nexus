@@ -1,9 +1,10 @@
+import * as React from "react"
 import { useTranslations } from "next-intl"
 import { Button } from "@/src/components/ui/button"
 import { LanguageSwitcher } from "@/src/components/common/languageSwitcher"
 import { ThemeToggle } from "@/src/components/common/themeToggle"
 
-export default function Page() {
+export default function Page(): React.JSX.Element {
   const t = useTranslations("Index")
 
   return (

@@ -23,7 +23,6 @@ export const siteConfig = {
   defaultLocale: "pt",
   analytics: {
     google: env.NEXT_PUBLIC_GA_ID || "",
-    facebook: env.NEXT_PUBLIC_FB_PIXEL_ID || "",
   },
 }
 

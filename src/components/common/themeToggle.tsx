@@ -29,7 +29,7 @@ export function ThemeToggle() {
   const isLight = resolvedTheme === "light"
 
   return (
-    <div className="group relative flex h-9 w-[72px] items-center rounded-full border border-border/60 bg-background/50 p-1 backdrop-blur-sm transition-all hover:border-border hover:bg-muted/50">
+    <div className="group relative flex h-9 w-18 items-center rounded-full border border-border/60 bg-background/50 p-1 backdrop-blur-sm transition-all hover:border-border hover:bg-muted/50">
       <motion.div
         className="absolute z-0 h-7 w-7 rounded-full bg-muted shadow-sm"
         initial={false}

@@ -30,8 +30,9 @@ This project is a high-performance, production-ready Landing Page template utili
 - **METADATA:** Use `generateMetadata` in `layout.tsx` or `page.tsx` for locale-aware SEO.
 - **ERRORS:** Use the `Errors` namespace in JSON for `error.tsx` and `not-found.tsx` messages.
 
-### 4. Styling (Tailwind CSS v4)
-- **BRANDING:** Prefer using centralized brand variables defined in `globals.css` (e.g., `text-brand-primary`, `bg-brand-secondary`).
+### 4. Styling & Typography (Tailwind CSS v4)
+- **BRANDING:** Prefer using centralized brand variables defined in `globals.css`.
+- **FONTS:** All fonts MUST be defined in `src/config/fonts.ts`. Use the `fontVariables` constant in the root layout.
 - **COLORS:** Use `oklch` for all custom color definitions for better accessibility and vibrancy.
 - **DESIGN SYSTEM:**
   - **Corners:** Use `rounded-full` for small interactive elements (triggers) and `rounded-2xl` for containers/menus.
@@ -77,6 +78,7 @@ Before committing any change, you MUST execute the following sequence:
 - `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
 - `pnpm audit`: Run Lighthouse audit on all routes.
+- `pnpm clean`: Wipe build caches and node_modules.
 - `pnpm lint`: Code quality check.
 - `pnpm typecheck`: Strict type verification.
 - `pnpm format`: Format code and sort imports.

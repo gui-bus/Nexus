@@ -1,7 +1,6 @@
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getMessages, getTranslations } from "next-intl/server"
-import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { cookies } from "next/headers"
 
 import { GoogleAnalytics } from "@next/third-parties/google"
@@ -11,16 +10,10 @@ import { ThemeProvider } from "@/src/components/common/themeProvider"
 
 import { cn } from "@/src/lib/utils/utils"
 
+import { fontVariables } from "@/src/config/fonts"
 import { siteConfig } from "@/src/config/site"
 
 import "@/src/app/globals.css"
-
-const outfitHeading = Outfit({ subsets: ["latin"], variable: "--font-heading" })
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
 
 export const viewport: Viewport = {
   themeColor: [
@@ -107,13 +100,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={cn(
-        "antialiased",
-        fontMono.variable,
-        "font-sans",
-        montserrat.variable,
-        outfitHeading.variable
-      )}
+      className={cn("antialiased", fontVariables)}
     >
       <head>
         <script

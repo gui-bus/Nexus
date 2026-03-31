@@ -35,6 +35,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **FONTS:** All fonts MUST be defined in `src/config/fonts.ts`. Use the `fontVariables` constant in the root layout.
 - **COLORS:** Use `oklch` for all custom color definitions for better accessibility and vibrancy.
 - **DESIGN SYSTEM:**
+  - **Layout:** The `body` tag in `layout.tsx` **MUST** always maintain the classes `mx-auto w-full max-w-440` for layout consistency.
   - **Corners:** Use `rounded-full` for small interactive elements (triggers) and `rounded-2xl` for containers/menus.
   - **Effects:** Use `backdrop-blur-sm` (or `xl`) for overlays and dropdowns.
   - **Minimalism:** Keep the UI clean, with subtle borders (`border-border/60`) and neutral backgrounds.

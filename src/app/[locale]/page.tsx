@@ -176,13 +176,7 @@ export default function Page(): React.JSX.Element {
             Interface Protocol
           </p>
           <div className="font-mono text-[9px] text-muted-foreground/60 uppercase tracking-[0.2em] flex items-center gap-2">
-            {t.rich("toggle_dark", {
-              kbd: (children) => (
-                <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border/60 text-foreground font-bold">
-                  {children}
-                </kbd>
-              ),
-            })}
+            Active_Session
           </div>
         </div>
 

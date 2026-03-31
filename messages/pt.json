@@ -3,8 +3,7 @@
     "title": "Projeto pronto!",
     "description": "Você já pode adicionar componentes e começar a construir.",
     "button": "Botão",
-    "added_component": "Já adicionamos o componente de botão para você.",
-    "toggle_dark": "(Pressione <kbd>d</kbd> para alternar o modo escuro)"
+    "added_component": "Já adicionamos o componente de botão para você."
   },
   "Locale": {
     "en": "Inglês",

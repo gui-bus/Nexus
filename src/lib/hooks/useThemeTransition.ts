@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 
 import { useTheme } from "next-themes"
 
@@ -40,17 +40,6 @@ export function useThemeTransition(): UseThemeTransition {
       await new Promise((resolve) => setTimeout(resolve, 0))
     })
   }, [theme, resolvedTheme, setTheme])
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent): void => {
-      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "t") {
-        e.preventDefault()
-        toggleTheme()
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [toggleTheme])
 
   return { theme, resolvedTheme, toggleTheme }
 }

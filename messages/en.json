@@ -3,8 +3,7 @@
     "title": "Project ready!",
     "description": "You may now add components and start building.",
     "button": "Button",
-    "added_component": "We've already added the button component for you.",
-    "toggle_dark": "(Press <kbd>d</kbd> to toggle dark mode)"
+    "added_component": "We've already added the button component for you."
   },
   "Locale": {
     "en": "English",

@@ -61,7 +61,7 @@ export function LanguageSwitcher(): React.JSX.Element {
             <ReactCountryFlag
               countryCode={flagCodes[currentLocale]}
               svg
-              className="rounded-xs opacity-90 grayscale-[0.2] transition-all group-hover:grayscale-0"
+              className="rounded-[2px] opacity-90 grayscale-[0.2] transition-all group-hover:grayscale-0"
               style={{ width: "1.1em", height: "0.8em" }}
             />
             <span className="text-xs font-medium text-muted-foreground uppercase transition-colors group-hover:text-foreground">
@@ -96,7 +96,7 @@ export function LanguageSwitcher(): React.JSX.Element {
                 countryCode={flagCodes[loc]}
                 svg
                 className={cn(
-                  "rounded-xs transition-all",
+                  "rounded-[2px] transition-all",
                   currentLocale === loc
                     ? "opacity-100"
                     : "opacity-60 grayscale-[0.4] group-hover:opacity-100 group-hover:grayscale-0"

@@ -49,7 +49,9 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
-- **TESTING:** All business logic, utility functions, components, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest. Run `pnpm test` regularly.
+- **TESTING:** 
+  - **Unit:** All business logic, utility functions, components, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest.
+  - **E2E:** Critical user flows (navigation, language switching, forms) MUST be verified using Playwright in `src/__tests__/e2e/`.
 - **DEPLOYMENT:** Use the provided `Dockerfile` (multi-stage) for production. Ensure `output: "standalone"` is enabled in `next.config.mjs`.
 
 ## Mandatory Development Workflow
@@ -73,7 +75,7 @@ If a user requests the creation of a new landing page or system based on this te
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
 - **Library:** React 19
-- **Testing:** Vitest + React Testing Library + JSDOM
+- **Testing:** Vitest + Playwright + React Testing Library + JSDOM
 - **Logging:** Pino (Structured)
 - **i18n:** next-intl (Prefix-less routing)
 - **Styling:** Tailwind CSS v4
@@ -84,7 +86,8 @@ If a user requests the creation of a new landing page or system based on this te
 ## Scripts
 - `pnpm dev`: Development server.
 - `pnpm build`: Production build (includes i18n check).
-- `pnpm test`: Run all tests (Unit + Component).
+- `pnpm test`: Run all unit tests.
+- `pnpm test:e2e`: Run Playwright E2E tests.
 - `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
 - `pnpm audit`: Run Lighthouse audit on all routes.

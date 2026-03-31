@@ -45,6 +45,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **COMPONENT LOCATION:** 
   - `src/components/ui/`: Base shadcn/ui components.
   - `src/components/common/`: Shared, high-level components.
+  - `src/components/sections/`: Landing page sections (e.g., Hero, Features). Use **camelCase** for filenames.
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
@@ -62,10 +63,12 @@ Before committing any change, you MUST execute the following sequence:
 5. **`pnpm build`**: Final validation for production readiness.
 
 ### Scaffolding (Industrial Productivity)
-When creating new components, **NEVER** create files manually. Use the generator:
+When creating new components or sections, **NEVER** create files manually. Use the generator:
 - **Command:** `pnpm generate`
-- **When to use:** Every time you need a new component in `common` or `ui`.
-- **What it does:** Generates the `.tsx` component file and its corresponding `.test.tsx` file already following all project standards (types, naming, mocks).
+- **When to use:** Every time you need a new component or section.
+
+### New Project Request
+If a user requests the creation of a new landing page or system based on this template, **YOU MUST** first read and follow the instructions in **`CHECKLIST.md`**.
 
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)

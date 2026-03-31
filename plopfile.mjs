@@ -1,6 +1,6 @@
 export default function (plop) {
   plop.setGenerator("component", {
-    description: "Create a new component",
+    description: "Create a new component or section",
     prompts: [
       {
         type: "input",
@@ -10,8 +10,8 @@ export default function (plop) {
       {
         type: "list",
         name: "type",
-        message: "Component type:",
-        choices: ["common", "ui"],
+        message: "Component type/location:",
+        choices: ["common", "ui", "sections"],
       },
     ],
     actions: [

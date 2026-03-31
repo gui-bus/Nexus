@@ -1,5 +1,5 @@
 export const siteConfig = {
-  // Technical configurations (non-translatable)
+  name: "Landing Page Template",
   shortName: "LandingTemplate",
   url: "https://example.com",
   ogImage: "https://example.com/og.png",

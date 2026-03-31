@@ -21,5 +21,10 @@
     "name": "Template de Landing Page",
     "description": "Um template profissional de landing page construído com Next.js, Tailwind CSS e shadcn/ui.",
     "keywords": "Next.js, React, Tailwind CSS, Server Components, Landing Page, Template"
+  },
+  "CookieConsent": {
+    "message": "Usamos cookies para melhorar sua experiência em nosso site.",
+    "accept": "Aceitar",
+    "decline": "Recusar"
   }
 }

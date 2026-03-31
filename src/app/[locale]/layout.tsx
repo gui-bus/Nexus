@@ -1,7 +1,7 @@
 import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
-import { getLocale, getMessages } from "next-intl/server"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
 import { GoogleAnalytics } from "@next/third-parties/google"
 
 import "@/src/app/globals.css"
@@ -23,44 +23,48 @@ export const viewport: Viewport = {
   ],
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  keywords: siteConfig.keywords,
-  authors: siteConfig.authors,
-  creator: siteConfig.creator,
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@bustamante_gui",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Config")
+
+  return {
+    title: {
+      default: t("name"),
+      template: `%s | ${t("name")}`,
+    },
+    description: t("description"),
+    keywords: t("keywords")
+      .split(",")
+      .map((k) => k.trim()),
+    authors: siteConfig.authors,
+    creator: siteConfig.creator,
+    openGraph: {
+      type: "website",
+      url: siteConfig.url,
+      title: t("name"),
+      description: t("description"),
+      siteName: t("name"),
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: t("name"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("name"),
+      description: t("description"),
+      images: [siteConfig.ogImage],
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-16x16.png",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: `${siteConfig.url}/site.webmanifest`,
+  }
 }
 
 export default async function RootLayout({
@@ -70,13 +74,13 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale()
   const messages = await getMessages()
+  const t = await getTranslations("Config")
 
-  // JSON-LD Structured Data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.name,
-    description: siteConfig.description,
+    name: t("name"),
+    description: t("description"),
     url: siteConfig.url,
   }
 
@@ -98,12 +102,11 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body className="mx-auto w-full max-w-440">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
 
-        {/* Google Analytics Placeholder */}
         {siteConfig.analytics.google && (
           <GoogleAnalytics gaId={siteConfig.analytics.google} />
         )}

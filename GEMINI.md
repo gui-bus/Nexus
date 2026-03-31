@@ -38,5 +38,6 @@ The project uses **pnpm** as the preferred package manager.
 - **Metadata:** Update `siteConfig` in `config/site.ts` for project-specific SEO.
 - **Path Aliases:** Use `@/` for root references.
 - **Class Merging:** Use the `cn` utility.
+- **No Comments:** NEVER include comments in the code.
 - **Git Hooks (Husky):** Pre-commit linting and commit message validation.
 - **Validation:** Always run `pnpm build` before committing.

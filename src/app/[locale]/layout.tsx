@@ -1,14 +1,12 @@
 import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
-import { notFound } from "next/navigation"
-import { routing } from "@/i18n/routing"
+import { getLocale, getMessages } from "next-intl/server"
 
-import "../globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/config/site"
+import "@/src/app/globals.css"
+import { ThemeProvider } from "@/src/components/common/themeProvider"
+import { cn } from "@/src/lib/utils"
+import { siteConfig } from "@/src/config/site"
 
 const outfitHeading = Outfit({ subsets: ["latin"], variable: "--font-heading" })
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
@@ -78,20 +76,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode
-  params: Promise<{ locale: string }>
 }>) {
-  const { locale } = await params
-
-  // Ensure that the incoming `locale` is valid
-  if (!(routing.locales as readonly string[]).includes(locale)) {
-    notFound()
-  }
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  const locale = await getLocale()
   const messages = await getMessages()
 
   return (

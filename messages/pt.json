@@ -6,6 +6,10 @@
     "added_component": "Já adicionamos o componente de botão para você.",
     "toggle_dark": "(Pressione <kbd>d</kbd> para alternar o modo escuro)"
   },
+  "Locale": {
+    "en": "Inglês",
+    "pt": "Português"
+  },
   "LanguageSwitcher": {
     "switch_to": "Mudar para {lang}"
   }

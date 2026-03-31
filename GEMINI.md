@@ -41,6 +41,7 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
+- **DEPLOYMENT:** Use the provided `Dockerfile` (multi-stage) for production. Ensure `output: "standalone"` is enabled in `next.config.mjs`.
 
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
@@ -49,6 +50,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **Styling:** Tailwind CSS v4
 - **Validation:** Zod
 - **CI/CD:** GitHub Actions
+- **Containerization:** Docker
 
 ## Scripts
 - `pnpm dev`: Development server.

@@ -8,6 +8,7 @@ const analyzer = withBundleAnalyzer({
 })
 
 const nextConfig = {
+  output: "standalone",
   async headers() {
     return [
       {

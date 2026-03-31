@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { useTranslations } from "next-intl"
 
+import { ArrowRight, Cpu, Pulse } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 
 import { Button } from "@/src/components/ui/button"
@@ -15,61 +16,83 @@ export default function Page(): React.JSX.Element {
   const t = useTranslations("Index")
 
   return (
-    <div className="relative min-h-svh w-full overflow-hidden bg-background font-sans text-foreground selection:bg-brand-primary selection:text-white uppercase tracking-tighter">
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20 dark:opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:44px_44px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <div className="relative min-h-svh w-full overflow-hidden bg-background font-sans text-foreground selection:bg-brand-primary/30 selection:text-brand-primary uppercase tracking-tighter">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-radial-gradient from-brand-primary/5 via-transparent to-transparent opacity-50" />
       </div>
 
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-8">
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-6 backdrop-blur-md bg-background/40 border-b border-border/40">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-3"
         >
-          <div className="h-2.5 w-2.5 rounded-full bg-brand-primary" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            Core Build 1.0.0
-          </span>
+          <div className="relative flex h-8 w-8 items-center justify-center">
+            <div className="absolute inset-0 rounded-lg bg-brand-primary/20 rotate-45" />
+            <Cpu
+              weight="fill"
+              className="h-4 w-4 text-brand-primary relative z-10"
+            />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="font-mono text-[10px] font-bold leading-none tracking-[0.2em] text-foreground">
+              PROJECT_TEMPLATE
+            </span>
+            <span className="font-mono text-[8px] tracking-[0.1em] text-muted-foreground/60 mt-1">
+              V16.1.7_STABLE
+            </span>
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
           className="flex items-center gap-4"
         >
           <LanguageSwitcher />
+          <div className="h-4 w-px bg-border/60" />
           <ThemeToggle />
         </motion.div>
       </header>
 
-      <main className="relative z-10 flex min-h-svh flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-12 pt-20">
-        <div className="flex-1 space-y-10 max-w-2xl">
+      <main className="relative z-10 flex min-h-svh flex-col lg:flex-row items-center justify-between gap-12 px-6 md:px-12 lg:px-24 pt-32 pb-24 text-left">
+        <div className="flex-1 space-y-12 max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            className="flex items-center gap-3"
           >
-            <span className="inline-block px-4 py-1.5 rounded-none border border-brand-primary/30 bg-brand-primary/5 text-[10px] font-bold uppercase tracking-[0.4em] text-brand-primary">
-              Elite Technical Template
+            <span className="h-[1px] w-8 bg-brand-primary" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-brand-primary">
+              System Infrastructure Ready
             </span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="font-heading text-6xl font-black uppercase leading-[0.85] tracking-[-0.05em] sm:text-8xl lg:text-[10rem] border-l-8 border-brand-primary pl-6"
-          >
-            {t("title")}
-          </motion.h1>
+          <div className="space-y-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="font-heading text-7xl font-black uppercase leading-[0.8] tracking-[-0.06em] sm:text-8xl lg:text-[11rem] drop-shadow-sm"
+            >
+              {t("title")}
+            </motion.h1>
+
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="h-1 bg-gradient-to-r from-brand-primary to-transparent"
+            />
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-muted-foreground leading-relaxed max-w-[520px] normal-case tracking-normal"
+            className="text-xl text-muted-foreground leading-relaxed max-w-[580px] normal-case tracking-normal font-medium"
           >
             {t("description")}
           </motion.p>
@@ -78,26 +101,30 @@ export default function Page(): React.JSX.Element {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-start gap-8 pt-6"
+            className="flex flex-col sm:flex-row items-start gap-10 pt-4"
           >
             <Button
               size="lg"
-              className="h-16 px-12 rounded-none bg-foreground text-background hover:bg-brand-primary hover:text-white transition-all duration-500 font-black uppercase text-xs tracking-[0.2em]"
+              className="group h-16 px-10 rounded-full bg-brand-primary text-white hover:bg-brand-primary/90 transition-all duration-300 font-bold uppercase text-xs tracking-[0.2em] shadow-xl shadow-brand-primary/20 hover:scale-105 active:scale-95 cursor-pointer"
             >
               {t("button")}
+              <ArrowRight
+                weight="bold"
+                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+              />
             </Button>
 
-            <div className="flex flex-col justify-center">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground/50 mb-1">
-                Status Protocol
+            <div className="flex flex-col justify-center border-l border-border/60 pl-8">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground/40 mb-2">
+                Network Status
               </span>
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
-                </span>
-                <span className="text-[11px] text-brand-primary font-mono tracking-widest leading-none">
-                  System_Online
+              <div className="flex items-center gap-3">
+                <div className="flex h-2 w-2 items-center justify-center">
+                  <div className="h-full w-full rounded-full bg-brand-primary animate-ping opacity-40" />
+                  <div className="absolute h-1.5 w-1.5 rounded-full bg-brand-primary" />
+                </div>
+                <span className="text-[11px] text-foreground font-mono font-bold tracking-widest leading-none">
+                  CORE_SYNC_ACTIVE
                 </span>
               </div>
             </div>
@@ -105,51 +132,66 @@ export default function Page(): React.JSX.Element {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, rotate: -5, scale: 0.9 }}
-          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          transition={{ delay: 0.4, duration: 1, ease: "circOut" }}
-          className="relative hidden xl:flex items-center justify-center w-[450px] h-[450px]"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative hidden lg:flex items-center justify-center w-[500px] h-[500px]"
         >
-          <div className="absolute inset-0 rounded-full border border-dashed border-border/20 animate-[spin_30s_linear_infinite]" />
-          <div className="absolute inset-16 rounded-full border border-brand-primary/10 animate-[spin_20s_linear_infinite_reverse]" />
+          <div className="absolute inset-0 rounded-full border border-brand-primary/10 animate-[spin_40s_linear_infinite]" />
+          <div className="absolute inset-12 rounded-full border-2 border-dashed border-border/20 animate-[spin_25s_linear_infinite_reverse]" />
 
-          <div className="relative h-64 w-64 bg-background border border-border shadow-[20px_20px_0px_0px_rgba(var(--brand-primary),0.1)] flex items-center justify-center group overflow-hidden">
-            <div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-5 transition-opacity duration-700" />
-            <div className="absolute top-0 left-0 w-full h-full p-4 flex flex-col justify-between">
-              <div className="flex justify-between items-start">
-                <span className="font-mono text-[10px] text-brand-primary opacity-40">
-                  01
-                </span>
-                <div className="h-4 w-4 border-t border-r border-brand-primary/40" />
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-brand-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="relative h-72 w-72 bg-card/40 backdrop-blur-2xl border border-border/60 shadow-2xl rounded-3xl flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute top-0 left-0 w-full h-full p-6 flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <Pulse
+                    weight="bold"
+                    className="h-5 w-5 text-brand-primary/40"
+                  />
+                  <span className="font-mono text-[10px] text-brand-primary font-bold">
+                    NODE_01
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  <div className="h-1 w-12 bg-brand-primary/20" />
+                  <div className="h-1 w-24 bg-brand-primary/40" />
+                  <div className="h-1 w-16 bg-brand-primary/20" />
+                </div>
               </div>
-              <div className="flex justify-between items-end">
-                <div className="h-4 w-4 border-b border-l border-brand-primary/40" />
-                <span className="font-mono text-[8px] text-muted-foreground/30">
-                  SEC_ALPHA_UNIT
+              <div className="relative flex flex-col items-center gap-4 text-center">
+                <div className="h-20 w-20 border-4 border-brand-primary rounded-full border-t-transparent animate-spin" />
+                <span className="font-mono text-[9px] text-brand-primary tracking-[0.4em] font-black">
+                  UPLINKING
                 </span>
               </div>
             </div>
-            <div className="h-32 w-32 border border-brand-primary/20 rotate-45 group-hover:rotate-90 transition-transform duration-1000" />
           </div>
         </motion.div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 z-50 flex items-end justify-between px-6 py-4 md:px-12 md:py-8 pointer-events-none">
-        <div className="flex flex-col gap-1.5">
-          <p className="font-mono text-[8px] uppercase tracking-[0.4em] text-muted-foreground/30">
-            Protocol Controls
+      <footer className="fixed bottom-0 left-0 right-0 z-50 flex items-end justify-between px-6 py-4 md:px-12 md:py-6 backdrop-blur-sm bg-background/10">
+        <div className="flex flex-col gap-2 text-left">
+          <p className="font-mono text-[8px] uppercase tracking-[0.4em] text-muted-foreground/40">
+            Interface Protocol
           </p>
-          <p className="font-mono text-[9px] text-muted-foreground/50 uppercase tracking-[0.2em]">
-            {t("toggle_dark")}
-          </p>
+          <div className="font-mono text-[9px] text-muted-foreground/60 uppercase tracking-[0.2em] flex items-center gap-2">
+            {t.rich("toggle_dark", {
+              kbd: (children) => (
+                <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border/60 text-foreground font-bold">
+                  {children}
+                </kbd>
+              ),
+            })}
+          </div>
         </div>
 
-        <div className="flex flex-col items-end gap-1.5 text-right">
-          <p className="font-mono text-[8px] uppercase tracking-[0.4em] text-muted-foreground/30">
-            System Hash
+        <div className="flex flex-col items-end gap-2 text-right">
+          <p className="font-mono text-[8px] uppercase tracking-[0.4em] text-muted-foreground/40">
+            Deployment Status
           </p>
-          <p className="font-mono text-[9px] text-muted-foreground/50 uppercase tracking-[0.2em]">
-            Elite_Node_V16
+          <p className="font-mono text-[10px] text-brand-primary font-bold uppercase tracking-[0.2em]">
+            SYSTEM_STABLE_V1
           </p>
         </div>
       </footer>

@@ -1,12 +1,15 @@
 "use client"
 
 import * as React from "react"
+
 import { useLocale, useTranslations } from "next-intl"
-import { CheckIcon, CaretDownIcon } from "@phosphor-icons/react"
-import Cookies from "js-cookie"
 import { useRouter } from "next/navigation"
-import ReactCountryFlag from "react-country-flag"
+
+import { locales } from "@/src/i18n/config"
+import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
+import Cookies from "js-cookie"
+import ReactCountryFlag from "react-country-flag"
 
 import {
   DropdownMenu,
@@ -14,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
-import { locales } from "@/src/i18n/config"
+
 import { cn } from "@/src/lib/utils/utils"
 
 const flagCodes: Record<string, string> = {

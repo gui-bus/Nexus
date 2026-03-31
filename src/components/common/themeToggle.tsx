@@ -1,12 +1,14 @@
 "use client"
 
 import * as React from "react"
+
+import { useTranslations } from "next-intl"
+
 import { MoonIcon, SunIcon } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 
-import { useTranslations } from "next-intl"
-import { cn } from "@/src/lib/utils/utils"
 import { useThemeTransition } from "@/src/lib/hooks/useThemeTransition"
+import { cn } from "@/src/lib/utils/utils"
 
 export function ThemeToggle(): React.JSX.Element {
   const t = useTranslations("ThemeToggle")

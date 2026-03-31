@@ -1,15 +1,19 @@
-import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getMessages, getTranslations } from "next-intl/server"
-import { GoogleAnalytics } from "@next/third-parties/google"
+import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { cookies } from "next/headers"
 
-import "@/src/app/globals.css"
-import { ThemeProvider } from "@/src/components/common/themeProvider"
-import { cn } from "@/src/lib/utils/utils"
-import { siteConfig } from "@/src/config/site"
+import { GoogleAnalytics } from "@next/third-parties/google"
+
 import { CookieConsent } from "@/src/components/common/cookieConsent"
+import { ThemeProvider } from "@/src/components/common/themeProvider"
+
+import { cn } from "@/src/lib/utils/utils"
+
+import { siteConfig } from "@/src/config/site"
+
+import "@/src/app/globals.css"
 
 const outfitHeading = Outfit({ subsets: ["latin"], variable: "--font-heading" })
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
@@ -69,6 +73,14 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: "/apple-touch-icon.png",
     },
     manifest: `${siteConfig.url}/site.webmanifest`,
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: t("name"),
+    },
+    formatDetection: {
+      telephone: false,
+    },
   }
 }
 

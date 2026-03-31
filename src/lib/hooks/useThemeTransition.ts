@@ -1,5 +1,7 @@
-import { useTheme } from "next-themes"
 import { useCallback, useEffect } from "react"
+
+import { useTheme } from "next-themes"
+
 import { createAnimation } from "../animations/themeAnimations"
 
 interface UseThemeTransition {

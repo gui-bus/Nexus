@@ -26,5 +26,17 @@
     "message": "We use cookies to improve your experience on our site.",
     "accept": "Accept",
     "decline": "Decline"
+  },
+  "Errors": {
+    "not_found": {
+      "title": "404 - Page Not Found",
+      "description": "The page you are looking for does not exist.",
+      "button": "Back to Home"
+    },
+    "general": {
+      "title": "Something went wrong!",
+      "description": "An unexpected error occurred.",
+      "button": "Try again"
+    }
   }
 }

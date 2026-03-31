@@ -26,5 +26,17 @@
     "message": "Usamos cookies para melhorar sua experiência em nosso site.",
     "accept": "Aceitar",
     "decline": "Recusar"
+  },
+  "Errors": {
+    "not_found": {
+      "title": "404 - Página não encontrada",
+      "description": "A página que você está procurando não existe.",
+      "button": "Voltar ao início"
+    },
+    "general": {
+      "title": "Algo deu errado!",
+      "description": "Ocorreu um erro inesperado.",
+      "button": "Tentar novamente"
+    }
   }
 }

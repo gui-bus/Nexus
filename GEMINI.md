@@ -8,6 +8,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **STRICT TYPES:** `any` is strictly FORBIDDEN. Use `unknown` or specific interfaces/types.
 - **EXPLICIT RETURNS:** All functions and React components MUST have explicit return types.
 - **TS-STRICT:** Maintain `strict: true` in `tsconfig.json` at all times.
+- **ENV VALIDATION:** All environment variables MUST be defined in `src/config/env.ts` and validated via Zod.
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
 
 ### 2. Code Style & Documentation
@@ -18,7 +19,7 @@ This project is a high-performance, production-ready Landing Page template utili
 ### 3. Internationalization (next-intl)
 - **UI TEXT:** NEVER hardcode strings in components. All user-facing text must be retrieved via `useTranslations` (client) or `getTranslations` (server).
 - **METADATA:** Use `generateMetadata` in `layout.tsx` or `page.tsx` for locale-aware SEO.
-- **KEYS:** Maintain the structure in `messages/*.json`. Group keys logically (e.g., `Index`, `Locale`, `Config`).
+- **KEYS:** Maintain the structure in `messages/*.json`. Group keys logically (e.g., `Index`, `Locale`, `Config`, `CookieConsent`).
 
 ### 4. Styling (Tailwind CSS v4)
 - **BRANDING:** Prefer using centralized brand variables defined in `globals.css` (e.g., `text-brand-primary`, `bg-brand-secondary`).
@@ -32,9 +33,10 @@ This project is a high-performance, production-ready Landing Page template utili
 - **PATH ALIASES:** Always use `@/` for root-relative imports (e.g., `@/src/components/...`).
 - **COMPONENT LOCATION:** 
   - `src/components/ui/`: Base shadcn/ui components.
-  - `src/components/common/`: Shared, high-level components (Switchers, Toggles).
+  - `src/components/common/`: Shared, high-level components (Switchers, Toggles, CookieConsent).
   - `src/app/`: Routes, layouts, and global styles.
 - **HOOKS & UTILS:** Place business logic in `src/lib/hooks/` and pure functions in `src/lib/utils/`.
+- **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
@@ -43,6 +45,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **Styling:** Tailwind CSS v4
 - **Icons:** Phosphor Icons
 - **Theme:** next-themes
+- **Validation:** Zod
 
 ## Scripts
 - `pnpm dev`: Development server.

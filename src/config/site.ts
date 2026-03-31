@@ -1,8 +1,10 @@
+import { env } from "./env"
+
 export const siteConfig = {
   name: "Landing Page Template",
   shortName: "LandingTemplate",
-  url: "https://example.com",
-  ogImage: "https://example.com/og.png",
+  url: env.NEXT_PUBLIC_SITE_URL,
+  ogImage: `${env.NEXT_PUBLIC_SITE_URL}/og.png`,
   authors: [
     {
       name: "Guilherme Bustamante",
@@ -20,8 +22,8 @@ export const siteConfig = {
   locales: ["pt", "en"],
   defaultLocale: "pt",
   analytics: {
-    google: process.env.NEXT_PUBLIC_GA_ID || "",
-    facebook: process.env.NEXT_PUBLIC_FB_PIXEL_ID || "",
+    google: env.NEXT_PUBLIC_GA_ID || "",
+    facebook: env.NEXT_PUBLIC_FB_PIXEL_ID || "",
   },
 }
 

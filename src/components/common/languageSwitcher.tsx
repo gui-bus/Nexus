@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
 import { locales } from "@/src/i18n/config"
-import { cn } from "@/src/lib/utils"
+import { cn } from "@/src/lib/utils/utils"
 
 const flagCodes: Record<string, string> = {
   en: "US",

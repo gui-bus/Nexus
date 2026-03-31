@@ -12,5 +12,9 @@
   },
   "LanguageSwitcher": {
     "switch_to": "Mudar para {lang}"
+  },
+  "ThemeToggle": {
+    "light": "Claro",
+    "dark": "Escuro"
   }
 }

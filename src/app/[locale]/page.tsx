@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Button } from "@/src/components/ui/button"
 import { LanguageSwitcher } from "@/src/components/common/languageSwitcher"
+import { ThemeToggle } from "@/src/components/common/themeToggle"
 
 export default function Page() {
   const t = useTranslations("Index")
@@ -9,6 +10,7 @@ export default function Page() {
     <div className="flex min-h-svh flex-col p-6">
       <div className="mb-4 flex justify-end">
         <LanguageSwitcher />
+        <ThemeToggle />
       </div>
       <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
         <div>

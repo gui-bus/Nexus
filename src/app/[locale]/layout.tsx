@@ -5,7 +5,7 @@ import { getLocale, getMessages } from "next-intl/server"
 
 import "@/src/app/globals.css"
 import { ThemeProvider } from "@/src/components/common/themeProvider"
-import { cn } from "@/src/lib/utils"
+import { cn } from "@/src/lib/utils/utils"
 import { siteConfig } from "@/src/config/site"
 
 const outfitHeading = Outfit({ subsets: ["latin"], variable: "--font-heading" })

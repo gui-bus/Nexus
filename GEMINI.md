@@ -60,6 +60,12 @@ Before committing any change, you MUST execute the following sequence:
 4. **`pnpm typecheck`**: Validates TypeScript integrity.
 5. **`pnpm build`**: Final validation for production readiness.
 
+### Scaffolding (Industrial Productivity)
+When creating new components, **NEVER** create files manually. Use the generator:
+- **Command:** `pnpm generate`
+- **When to use:** Every time you need a new component in `common` or `ui`.
+- **What it does:** Generates the `.tsx` component file and its corresponding `.test.tsx` file already following all project standards (types, naming, mocks).
+
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
 - **Library:** React 19
@@ -82,3 +88,4 @@ Before committing any change, you MUST execute the following sequence:
 - `pnpm lint`: Code quality check.
 - `pnpm typecheck`: Strict type verification.
 - `pnpm format`: Format code and sort imports.
+- `pnpm generate`: Create new components via Plop.js.

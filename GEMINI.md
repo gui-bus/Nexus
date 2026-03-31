@@ -10,9 +10,10 @@ This project is a high-performance, production-ready Landing Page template utili
 - **TS-STRICT:** Maintain `strict: true` in `tsconfig.json` at all times.
 - **ENV VALIDATION:** All environment variables MUST be defined in `src/config/env.ts` and validated via Zod.
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
+- **CI/CD:** All changes MUST pass the GitHub Actions pipeline (Lint, Typecheck, i18n Sync, Build).
 
 ### 2. Code Style & Documentation
-- **NO COMMENTS:** NEVER include comments in the source code.
+- **NO COMMENTS:** NEVER include comments in the source code. The code must be self-explanatory through clean naming and structure.
 - **IMPORT ORDER:** Imports MUST be sorted automatically via Prettier (React, Next, Third-party, Internal, Local).
 - **NAMING:** Use descriptive, camelCase for variables/functions and PascalCase for components.
 - **SURGICAL UPDATES:** Apply minimal, targeted changes. Avoid unrelated refactoring.
@@ -20,6 +21,7 @@ This project is a high-performance, production-ready Landing Page template utili
 ### 3. Internationalization (next-intl)
 - **UI TEXT:** NEVER hardcode strings in components. All user-facing text must be retrieved via `useTranslations` (client) or `getTranslations` (server).
 - **TYPED KEYS:** Ensure `src/types/intl.d.ts` is updated when adding new translation namespaces to maintain type safety.
+- **I18N SYNC:** All translation files (`messages/*.json`) MUST have identical keys. The build will fail if they are out of sync. Run `pnpm check-i18n` to verify.
 - **METADATA:** Use `generateMetadata` in `layout.tsx` or `page.tsx` for locale-aware SEO.
 - **ERRORS:** Use the `Errors` namespace in JSON for `error.tsx` and `not-found.tsx` messages.
 
@@ -45,14 +47,13 @@ This project is a high-performance, production-ready Landing Page template utili
 - **Library:** React 19
 - **i18n:** next-intl (Prefix-less routing)
 - **Styling:** Tailwind CSS v4
-- **Icons:** Phosphor Icons
-- **Theme:** next-themes
 - **Validation:** Zod
-- **PWA:** manifest.ts
+- **CI/CD:** GitHub Actions
 
 ## Scripts
 - `pnpm dev`: Development server.
-- `pnpm build`: Production build.
+- `pnpm build`: Production build (includes i18n check).
+- `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
 - `pnpm lint`: Code quality check.
 - `pnpm typecheck`: Strict type verification.

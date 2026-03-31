@@ -12,7 +12,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
 - **CI/CD:** All changes MUST pass the GitHub Actions pipeline (Lint, Typecheck, i18n Sync, Build).
 - **QUALITY GATE:** 
-  - A Husky `pre-commit` hook runs `pnpm test` and `lint-staged` automatically.
+  - A Husky `pre-commit` hook runs `pnpm test`, `pnpm lint:secrets`, and `lint-staged` automatically.
   - A Husky `pre-push` hook runs `pnpm build` automatically.
   - NEVER bypass these gates.
 
@@ -47,7 +47,7 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/components/common/`: Shared, high-level components.
   - `src/components/sections/`: Landing page sections (e.g., Hero, Features). Use **camelCase** for filenames.
   - `src/app/`: Routes, layouts, and global styles.
-- **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
+- **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`. Use `pnpm lint:secrets` to scan for credentials.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
 - **TESTING:** 
   - **Unit:** All business logic, utility functions, components, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest.
@@ -82,12 +82,14 @@ If a user requests the creation of a new landing page or system based on this te
 - **Validation:** Zod
 - **CI/CD:** GitHub Actions
 - **Containerization:** Docker
+- **Security:** Secretlint
 
 ## Scripts
 - `pnpm dev`: Development server.
 - `pnpm build`: Production build (includes i18n check).
 - `pnpm test`: Run all unit tests.
 - `pnpm test:e2e`: Run Playwright E2E tests.
+- `pnpm lint:secrets`: Scan codebase for accidental secrets.
 - `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
 - `pnpm audit`: Run Lighthouse audit on all routes.

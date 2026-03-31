@@ -2,6 +2,7 @@ import { Geist_Mono, Montserrat, Outfit } from "next/font/google"
 import { Metadata, Viewport } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale, getMessages } from "next-intl/server"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 import "@/src/app/globals.css"
 import { ThemeProvider } from "@/src/components/common/themeProvider"
@@ -28,21 +29,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Landing Page",
-    "Template",
-  ],
-  authors: [
-    {
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-  ],
-  creator: siteConfig.name,
+  keywords: siteConfig.keywords,
+  authors: siteConfig.authors,
+  creator: siteConfig.creator,
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -82,6 +71,15 @@ export default async function RootLayout({
   const locale = await getLocale()
   const messages = await getMessages()
 
+  // JSON-LD Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+  }
+
   return (
     <html
       lang={locale}
@@ -94,10 +92,21 @@ export default async function RootLayout({
         outfitHeading.variable
       )}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
+
+        {/* Google Analytics Placeholder */}
+        {siteConfig.analytics.google && (
+          <GoogleAnalytics gaId={siteConfig.analytics.google} />
+        )}
       </body>
     </html>
   )

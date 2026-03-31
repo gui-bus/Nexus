@@ -67,18 +67,6 @@ When creating new components, **NEVER** create files manually. Use the generator
 - **When to use:** Every time you need a new component in `common` or `ui`.
 - **What it does:** Generates the `.tsx` component file and its corresponding `.test.tsx` file already following all project standards (types, naming, mocks).
 
-## New Project Checklist (Must Do)
-Every time you clone this template for a new landing page, follow these steps:
-
-1.  **Identity:** Update `name`, `shortName`, and social links in `src/config/site.ts`.
-2.  **Branding:** Update `--brand-primary` and `--brand-secondary` in `src/app/globals.css`.
-3.  **Typography:** Choose new fonts in `src/config/fonts.ts` if needed.
-4.  **SEO:** Update the `Config` namespace in `messages/pt.json` and `messages/en.json` (title, description, keywords).
-5.  **Environment:** Copy `.env.example` to `.env` and set `NEXT_PUBLIC_SITE_URL`.
-6.  **Assets:** Replace files in `public/` (favicon, apple-touch-icon, og.png).
-7.  **Package:** Update `name` and `version` in `package.json`.
-8.  **Clean:** Run `pnpm clean` to remove build artifacts from the template.
-
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
 - **Library:** React 19

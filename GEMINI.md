@@ -11,7 +11,10 @@ This project is a high-performance, production-ready Landing Page template utili
 - **ENV VALIDATION:** All environment variables MUST be defined in `src/config/env.ts` and validated via Zod.
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
 - **CI/CD:** All changes MUST pass the GitHub Actions pipeline (Lint, Typecheck, i18n Sync, Build).
-- **QUALITY GATE:** A Husky `pre-push` hook is active and will run `pnpm build` automatically. NEVER bypass this gate.
+- **QUALITY GATE:** 
+  - A Husky `pre-commit` hook runs `pnpm test` and `lint-staged` automatically.
+  - A Husky `pre-push` hook runs `pnpm build` automatically.
+  - NEVER bypass these gates.
 
 ### 2. Code Style & Documentation
 - **NO COMMENTS:** NEVER include comments in the source code. The code must be self-explanatory through clean naming and structure.
@@ -43,7 +46,7 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
-- **TESTING:** All business logic, utility functions, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest. Run `pnpm test` regularly.
+- **TESTING:** All business logic, utility functions, components, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest. Run `pnpm test` regularly.
 - **DEPLOYMENT:** Use the provided `Dockerfile` (multi-stage) for production. Ensure `output: "standalone"` is enabled in `next.config.mjs`.
 
 ## Mandatory Development Workflow
@@ -52,14 +55,14 @@ Before committing any change, you MUST execute the following sequence:
 
 1. **`pnpm format`**: Ensures imports are sorted and code style is consistent.
 2. **`pnpm check-i18n`**: Verifies all translation files are synchronized.
-3. **`pnpm test`**: Ensures all unit tests pass.
+3. **`pnpm test`**: Ensures all unit and component tests pass.
 4. **`pnpm typecheck`**: Validates TypeScript integrity.
 5. **`pnpm build`**: Final validation for production readiness.
 
 ## Main Technologies
 - **Framework:** Next.js 16 (App Router)
 - **Library:** React 19
-- **Testing:** Vitest + JSDOM
+- **Testing:** Vitest + React Testing Library + JSDOM
 - **Logging:** Pino (Structured)
 - **i18n:** next-intl (Prefix-less routing)
 - **Styling:** Tailwind CSS v4
@@ -70,7 +73,7 @@ Before committing any change, you MUST execute the following sequence:
 ## Scripts
 - `pnpm dev`: Development server.
 - `pnpm build`: Production build (includes i18n check).
-- `pnpm test`: Run all unit tests.
+- `pnpm test`: Run all tests (Unit + Component).
 - `pnpm check-i18n`: Verify translation files sync.
 - `pnpm analyze`: Analyze bundle sizes.
 - `pnpm audit`: Run Lighthouse audit on all routes.

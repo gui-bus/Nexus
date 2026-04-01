@@ -5,6 +5,7 @@ This project is a high-performance, production-ready Landing Page template utili
 ## Core Mandates
 
 ### 1. Technical Integrity & Typing
+- **SERVER COMPONENTS FIRST:** Every component **MUST** be a Server Component by default. Use `'use client'` only as a last resort when strictly necessary for interactivity (hooks like `useState`/`useEffect` or event listeners). Aim for maximum server-side rendering to ensure elite performance.
 - **STRICT TYPES:** `any` is strictly FORBIDDEN. Use `unknown` or specific interfaces/types.
 - **EXPLICIT RETURNS:** All functions and React components MUST have explicit return types.
 - **INTERFACE NAMING:** Never use generic names like `interface Props`. Use descriptive names like `interface ButtonProps` to ensure clarity and reusability.
@@ -46,7 +47,6 @@ This project is a high-performance, production-ready Landing Page template utili
 
 ### 5. Architectural Standards
 - **PATH ALIASES:** Always use `@/` for root-relative imports (e.g., `@/src/components/...`).
-- **SERVER COMPONENTS FIRST:** All components MUST be Server Components by default. Use `'use client'` only when strictly necessary for interactivity (hooks, event listeners).
 - **COMPOSITION:** Prefer component composition (`children`) over excessive props. Limit components to a maximum of 5-7 props.
 - **COMPONENT LOCATION:** 
   - `src/components/ui/`: Base shadcn/ui components.

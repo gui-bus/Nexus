@@ -7,6 +7,7 @@ This project is a high-performance, production-ready Landing Page template utili
 ### 1. Technical Integrity & Typing
 - **STRICT TYPES:** `any` is strictly FORBIDDEN. Use `unknown` or specific interfaces/types.
 - **EXPLICIT RETURNS:** All functions and React components MUST have explicit return types.
+- **INTERFACE NAMING:** Never use generic names like `interface Props`. Use descriptive names like `interface ButtonProps` to ensure clarity and reusability.
 - **TS-STRICT:** Maintain `strict: true` in `tsconfig.json` at all times.
 - **ENV VALIDATION:** All environment variables MUST be defined in `src/config/env.ts` and validated via Zod.
 - **VALIDATION:** Always run `pnpm build` before finality. A task is only complete when it passes the production build.
@@ -21,6 +22,8 @@ This project is a high-performance, production-ready Landing Page template utili
 - **IMPORT ORDER:** Imports MUST be sorted automatically via Prettier (React, Next, Third-party, Internal, Local).
 - **LOGGING:** `console.log` is strictly FORBIDDEN. Use the structured `logger` from `@/src/lib/logger`.
 - **NAMING:** Use descriptive, camelCase for variables/functions and PascalCase for components.
+- **SEMANTIC HTML:** Prohibit the use of `div` for everything. Use semantic tags like `section`, `header`, `footer`, `article`, and `aside` to maintain elite SEO and accessibility.
+- **ACCESSIBILITY:** Every button or interactive element containing only an icon (no text) **MUST** have an `aria-label` attribute.
 - **SURGICAL UPDATES:** Apply minimal, targeted changes. Avoid unrelated refactoring.
 
 ### 3. Internationalization (next-intl)
@@ -42,6 +45,8 @@ This project is a high-performance, production-ready Landing Page template utili
 
 ### 5. Architectural Standards
 - **PATH ALIASES:** Always use `@/` for root-relative imports (e.g., `@/src/components/...`).
+- **SERVER COMPONENTS FIRST:** All components MUST be Server Components by default. Use `'use client'` only when strictly necessary for interactivity (hooks, event listeners).
+- **COMPOSITION:** Prefer component composition (`children`) over excessive props. Limit components to a maximum of 5-7 props.
 - **COMPONENT LOCATION:** 
   - `src/components/ui/`: Base shadcn/ui components.
   - `src/components/common/`: Shared, high-level components.
@@ -49,6 +54,7 @@ This project is a high-performance, production-ready Landing Page template utili
   - `src/app/`: Routes, layouts, and global styles.
 - **SECURITY:** Maintain strict Content Security Policy (CSP) and security headers in `next.config.mjs`. Use `pnpm lint:secrets` to scan for credentials.
 - **PERFORMANCE:** Use `pnpm analyze` to monitor bundle sizes and maintain edge runtime for dynamic routes where possible.
+- **MAINTENANCE:** Before adding any new library, validate its impact via `pnpm analyze`. Favor native Web APIs over third-party packages.
 - **TESTING:** 
   - **Unit:** All business logic, utility functions, components, and configurations MUST have corresponding tests in `src/__tests__/` using Vitest.
   - **E2E:** Critical user flows (navigation, language switching, forms) MUST be verified using Playwright in `src/__tests__/e2e/`.
@@ -63,6 +69,9 @@ Before committing any change, you MUST execute the following sequence:
 3. **`pnpm test`**: Ensures all unit and component tests pass.
 4. **`pnpm typecheck`**: Validates TypeScript integrity.
 5. **`pnpm build`**: Final validation for production readiness.
+
+### Git & Commit Rules
+- **SEMANTIC COMMITS:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, `style:`). Non-compliant commits will be rejected by the pre-commit hooks.
 
 ### Scaffolding (Industrial Productivity)
 When creating new components or sections, **NEVER** create files manually. Use the generator:

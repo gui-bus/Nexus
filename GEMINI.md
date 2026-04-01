@@ -22,6 +22,7 @@ This project is a high-performance, production-ready Landing Page template utili
 - **IMPORT ORDER:** Imports MUST be sorted automatically via Prettier (React, Next, Third-party, Internal, Local).
 - **LOGGING:** `console.log` is strictly FORBIDDEN. Use the structured `logger` from `@/src/lib/logger`.
 - **NAMING:** Use descriptive, camelCase for variables/functions and PascalCase for components.
+- **ICONS:** Use **Phosphor Icons** (`@phosphor-icons/react`) exclusively. NEVER use Lucide or other libraries. When installing shadcn/ui components, you **MUST** manually replace all Lucide icons with their Phosphor equivalents.
 - **SEMANTIC HTML:** Prohibit the use of `div` for everything. Use semantic tags like `section`, `header`, `footer`, `article`, and `aside` to maintain elite SEO and accessibility.
 - **ACCESSIBILITY:** Every button or interactive element containing only an icon (no text) **MUST** have an `aria-label` attribute.
 - **SURGICAL UPDATES:** Apply minimal, targeted changes. Avoid unrelated refactoring.

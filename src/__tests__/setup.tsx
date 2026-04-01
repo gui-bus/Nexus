@@ -21,9 +21,16 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, ...props }: Record<string, unknown>) =>
-      React.createElement("div", props, children),
+    div: ({
+      children,
+      ...props
+    }: { children?: React.ReactNode } & Record<string, unknown>) =>
+      React.createElement(
+        "div",
+        props as React.HTMLAttributes<HTMLDivElement>,
+        children
+      ),
   },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) =>
+  AnimatePresence: ({ children }: { children?: React.ReactNode }) =>
     React.createElement(React.Fragment, null, children),
 }))

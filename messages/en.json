@@ -1,9 +1,9 @@
 {
   "Index": {
     "title": "Project ready!",
-    "description": "You may now add components and start building.",
-    "button": "Button",
-    "added_component": "We've already added the button component for you."
+    "description": "You can now add components and start building.",
+    "bloomDoc": "Built with the Bloom UI component library.",
+    "cleanupInstruction": "If you want to start your project from scratch by clearing Nexus logos and layouts, run pnpm cleanup in your terminal."
   },
   "Locale": {
     "en": "English",

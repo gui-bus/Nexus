@@ -20,6 +20,8 @@ A CLI guiará você por um fluxo de perguntas interativo para customizar o seu s
 * **Internacionalização (i18n):** Escolha se deseja habilitar rotas e traduções com `next-intl`.
 * **Suporte a Docker:** Adicione ou remova configurações de `Dockerfile` e `docker-compose.yml`.
 * **GitHub Actions:** Mantenha ou remova os arquivos de CI/CD para automações no GitHub.
+* **TanStack Query & Devtools:** Escolha se deseja incluir o cliente de requisições e cache com Devtools integrado.
+* **Regras de IA (setup-ai):** Escolha se deseja gerar automaticamente as regras e arquivos de contexto para assistentes de IA (Antigravity, Cursor, etc.).
 * **Gerenciador de pacotes:** Selecione entre `pnpm`, `npm`, `yarn` ou `bun` (a CLI fará a instalação automática das dependências caso decida).
 
 ### Comandos de Desenvolvimento

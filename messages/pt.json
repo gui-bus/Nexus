@@ -2,8 +2,8 @@
   "Index": {
     "title": "Projeto pronto!",
     "description": "Você já pode adicionar componentes e começar a construir.",
-    "button": "Botão",
-    "added_component": "Já adicionamos o componente de botão para você."
+    "bloomDoc": "Desenvolvido com a biblioteca de componentes Bloom UI.",
+    "cleanupInstruction": "Se quiser começar seu projeto do zero limpando os logos e layouts do Nexus, execute pnpm cleanup no terminal."
   },
   "Locale": {
     "en": "Inglês",

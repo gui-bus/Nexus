@@ -1,82 +1,127 @@
 #!/usr/bin/env node
 
-import { existsSync, mkdirSync, rmSync, readFileSync, writeFileSync, copyFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { execSync } from 'node:child_process';
-import prompts from 'prompts';
-import { red, green, bold } from 'kolorist';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { cancel, confirm, intro, isCancel, outro, select, spinner, text } from '@clack/prompts';
+import pc from 'picocolors';
+
+function handleCancel(value) {
+  if (isCancel(value)) {
+    cancel('Operação cancelada.');
+    process.exit(0);
+  }
+}
 
 async function init() {
-  const response = await prompts([
-    {
-      type: 'text',
-      name: 'projectName',
-      message: 'Qual é o nome do seu projeto?',
-      initial: 'my-nexus-app'
-    },
-    {
-      type: 'confirm',
-      name: 'useI18n',
-      message: 'Deseja configurar suporte a múltiplos idiomas (i18n)?',
-      initial: true
-    },
-    {
-      type: 'confirm',
-      name: 'useDocker',
-      message: 'Deseja incluir suporte a Docker (Dockerfile/Compose)?',
-      initial: true
-    },
-    {
-      type: 'confirm',
-      name: 'useGithubActions',
-      message: 'Deseja incluir automações de CI/CD do GitHub Actions?',
-      initial: true
-    },
-    {
-      type: 'select',
-      name: 'packageManager',
-      message: 'Qual gerenciador de pacotes você deseja usar?',
-      choices: [
-        { title: 'pnpm', value: 'pnpm' },
-        { title: 'npm', value: 'npm' },
-        { title: 'yarn', value: 'yarn' },
-        { title: 'bun', value: 'bun' }
-      ],
-      initial: 0
-    },
-    {
-      type: 'confirm',
-      name: 'installDeps',
-      message: 'Deseja instalar as dependências agora?',
-      initial: true
-    }
-  ]);
+  intro(pc.cyan(pc.bold(' Nexus App CLI ')));
 
-  const { projectName, useI18n, useDocker, useGithubActions, packageManager, installDeps } = response;
-  if (!projectName || !packageManager) {
-    return;
-  }
+  const projectName = await text({
+    message: 'Qual é o nome do seu projeto?',
+    placeholder: 'my-nexus-app',
+    initialValue: 'my-nexus-app',
+    validate(value) {
+      if (value.trim().length === 0) return 'O nome do projeto não pode ser vazio!';
+    }
+  });
+  handleCancel(projectName);
+
+  const useI18n = await confirm({
+    message: 'Deseja configurar suporte a múltiplos idiomas (i18n)?',
+    initialValue: true
+  });
+  handleCancel(useI18n);
+
+  const useDocker = await confirm({
+    message: 'Deseja incluir suporte a Docker (Dockerfile/Compose)?',
+    initialValue: true
+  });
+  handleCancel(useDocker);
+
+  const useGithubActions = await confirm({
+    message: 'Deseja incluir automações de CI/CD do GitHub Actions?',
+    initialValue: true
+  });
+  handleCancel(useGithubActions);
+
+  const useReactQuery = await confirm({
+    message: 'Deseja configurar o TanStack Query (React Query) e Devtools?',
+    initialValue: true
+  });
+  handleCancel(useReactQuery);
+
+  const setupAi = await confirm({
+    message: 'Deseja configurar regras de IA para assistentes (setup-ai)?',
+    initialValue: true
+  });
+  handleCancel(setupAi);
+
+  const packageManager = await select({
+    message: 'Qual gerenciador de pacotes você deseja usar?',
+    options: [
+      { label: 'pnpm', value: 'pnpm' },
+      { label: 'npm', value: 'npm' },
+      { label: 'yarn', value: 'yarn' },
+      { label: 'bun', value: 'bun' }
+    ],
+    initialValue: 'pnpm'
+  });
+  handleCancel(packageManager);
+
+  const installDeps = await confirm({
+    message: 'Deseja instalar as dependências agora?',
+    initialValue: true
+  });
+  handleCancel(installDeps);
 
   const targetDir = join(process.cwd(), projectName);
 
   if (existsSync(targetDir)) {
-    console.error(red(`Erro: O diretório "${projectName}" já existe.`));
+    cancel(`Erro: O diretório "${projectName}" já existe.`);
     process.exit(1);
   }
 
-  console.log(green(`\nCriando um novo projeto Nexus em: ${targetDir}...`));
-  mkdirSync(targetDir, { recursive: true });
+  const s = spinner();
 
   try {
+    s.start('Clonando o repositório do Nexus...');
     const REPO_URL = 'https://github.com/gui-bus/Nexus.git';
-    execSync(`git clone --depth 1 ${REPO_URL} "${targetDir}"`, { stdio: 'inherit' });
+    execSync(`git clone --depth 1 ${REPO_URL} "${targetDir}"`, { stdio: 'ignore' });
+    s.stop('Repositório clonado com sucesso.');
 
     const gitFolder = join(targetDir, '.git');
     const rmCommand = process.platform === 'win32' ? `rmdir /s /q "${gitFolder}"` : `rm -rf "${gitFolder}"`;
     execSync(rmCommand);
 
+    const cleanupCmdMap = {
+      pnpm: 'pnpm cleanup',
+      npm: 'npm run cleanup',
+      yarn: 'yarn cleanup',
+      bun: 'bun cleanup'
+    };
+    const targetCleanupCmd = cleanupCmdMap[packageManager] || 'pnpm cleanup';
+
+    if (targetCleanupCmd !== 'pnpm cleanup') {
+      s.start('Configurando comandos do gerenciador de pacotes selecionado...');
+      const filesToReplace = [
+        join(targetDir, 'src', 'app', '[locale]', 'page.tsx'),
+        join(targetDir, '.nexus-no-i18n', 'page.tsx'),
+        join(targetDir, 'messages', 'pt.json'),
+        join(targetDir, 'messages', 'en.json'),
+      ];
+
+      for (const file of filesToReplace) {
+        if (existsSync(file)) {
+          const content = readFileSync(file, 'utf8');
+          const updated = content.replace(/pnpm cleanup/g, targetCleanupCmd);
+          writeFileSync(file, updated, 'utf8');
+        }
+      }
+      s.stop('Comandos configurados.');
+    }
+
     if (!useI18n) {
-      console.log(green('\nRemovendo configurações de i18n (next-intl)...'));
+      s.start('Removendo configurações de i18n (next-intl)...');
 
       const backupDir = join(targetDir, '.nexus-no-i18n');
       const appDir = join(targetDir, 'src', 'app');
@@ -107,6 +152,7 @@ async function init() {
       if (existsSync(proxyFile)) {
         rmSync(proxyFile, { force: true });
       }
+      s.stop('Configurações de i18n removidas.');
     }
 
     const backupFolder = join(targetDir, '.nexus-no-i18n');
@@ -115,7 +161,7 @@ async function init() {
     }
 
     if (!useDocker) {
-      console.log(green('\nRemovendo suporte a Docker...'));
+      s.start('Removendo suporte a Docker...');
       const dockerfiles = [
         join(targetDir, 'Dockerfile'),
         join(targetDir, '.dockerignore'),
@@ -126,14 +172,37 @@ async function init() {
           rmSync(file, { force: true });
         }
       }
+      s.stop('Suporte a Docker removido.');
     }
 
     if (!useGithubActions) {
-      console.log(green('\nRemovendo fluxos de trabalho do GitHub Actions (CI/CD)...'));
+      s.start('Removendo fluxos de trabalho do GitHub Actions...');
       const githubFolder = join(targetDir, '.github');
       if (existsSync(githubFolder)) {
         rmSync(githubFolder, { recursive: true, force: true });
       }
+      s.stop('Fluxos do GitHub Actions removidos.');
+    }
+
+    if (!useReactQuery) {
+      s.start('Removendo TanStack Query (React Query) e Devtools...');
+      const providerFile = join(targetDir, 'src', 'lib', 'query-provider.tsx');
+      if (existsSync(providerFile)) {
+        rmSync(providerFile, { force: true });
+      }
+
+      const pkJsonPath = join(targetDir, 'package.json');
+      const pkJson = JSON.parse(readFileSync(pkJsonPath, 'utf8'));
+      if (pkJson.dependencies) {
+        if (pkJson.dependencies['@tanstack/react-query']) {
+          delete pkJson.dependencies['@tanstack/react-query'];
+        }
+        if (pkJson.dependencies['@tanstack/react-query-devtools']) {
+          delete pkJson.dependencies['@tanstack/react-query-devtools'];
+        }
+      }
+      writeFileSync(pkJsonPath, JSON.stringify(pkJson, null, 2), 'utf8');
+      s.stop('TanStack Query e Devtools removidos.');
     }
 
     if (packageManager !== 'pnpm') {
@@ -144,24 +213,34 @@ async function init() {
     }
 
     if (installDeps) {
-      console.log(green(`\nInstalando dependências usando o ${packageManager}...`));
+      console.log(pc.green(`\nInstalando dependências usando o ${packageManager}...`));
       const installCommand = `${packageManager} install`;
       execSync(installCommand, { cwd: targetDir, stdio: 'inherit' });
     }
 
     execSync('git init', { cwd: targetDir, stdio: 'ignore' });
 
-    console.log(green('\nProjeto criado com sucesso!'));
-    console.log(`\nExecute os seguintes comandos para começar:\n`);
-    console.log(bold(`  cd ${projectName}`));
+    if (setupAi) {
+      console.log(pc.green('\nConfigurando regras de IA do Bloom UI...'));
+      try {
+        execSync('npx @bloomui-react/cli setup-ai', { cwd: targetDir, stdio: 'inherit' });
+      } catch (err) {
+        console.warn('Aviso: Falha ao rodar o setup de IA do Bloom UI.');
+      }
+    }
+
+    outro(pc.green(pc.bold('Projeto criado com sucesso!')));
+    console.log(`Execute os seguintes comandos para começar:\n`);
+    console.log(pc.cyan(`  cd ${projectName}`));
     if (!installDeps) {
-      console.log(bold(`  ${packageManager} install`));
+      console.log(pc.cyan(`  ${packageManager} install`));
     }
     const devRunCommand = packageManager === 'npm' ? 'npm run dev' : `${packageManager} dev`;
-    console.log(bold(`  ${devRunCommand}\n`));
+    console.log(pc.cyan(`  ${devRunCommand}\n`));
 
   } catch (error) {
-    console.error(red('Ocorreu um erro durante a criação do projeto:'), error);
+    cancel('Ocorreu um erro durante a criação do projeto.');
+    console.error(error);
   }
 }
 

@@ -3,73 +3,166 @@
 import * as React from "react"
 
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 
 import { motion } from "framer-motion"
 
-import { Button } from "@/src/components/ui/button/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip/tooltip"
 
 import { LanguageSwitcher } from "@/src/components/common/languageSwitcher"
 import { ThemeToggle } from "@/src/components/common/themeToggle"
 
+import { useThemeTransition } from "@/src/lib/hooks/useThemeTransition"
+
 export default function Page(): React.JSX.Element {
   const t = useTranslations("Index")
+  const { resolvedTheme } = useThemeTransition()
+  const [mounted, setMounted] = React.useState(false)
+  const cleanupCmd = "pnpm cleanup"
+
+  React.useEffect(() => {
+    const timer = requestAnimationFrame(() => {
+      setMounted(true)
+    })
+    return () => cancelAnimationFrame(timer)
+  }, [])
+
+  const logoSrc =
+    mounted && resolvedTheme === "dark"
+      ? "/logos/logo_white.svg"
+      : "/logos/logo_black.svg"
+  const techTheme = mounted && resolvedTheme === "dark" ? "Dark" : "Light"
+
+  const techs = [
+    "React",
+    "NextJS",
+    "Typescript",
+    "TailwindCSS",
+    "Bloom",
+    "Framer Motion",
+    "React Hook Form",
+    "Zod",
+    "Tanstack",
+    "nextintl",
+    "pnpm",
+    "Vitest",
+    "Playwright",
+    "Husky",
+    "Zustand",
+  ]
 
   return (
-    <div className="relative min-h-svh w-full overflow-hidden bg-background font-sans text-foreground">
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-6 backdrop-blur-md bg-background/40 border-b border-border/40">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2"
-        >
-          <span className="text-xl font-bold tracking-tight text-brand-primary">
-            Nexus
-          </span>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-4"
-        >
-          <LanguageSwitcher />
-          <div className="h-4 w-px bg-border/60" />
-          <ThemeToggle />
-        </motion.div>
-      </header>
-
-      <main className="relative z-10 flex min-h-svh flex-col items-center justify-center px-6 md:px-12 text-center max-w-4xl mx-auto">
-        <div className="space-y-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="font-sans text-4xl font-bold tracking-tight sm:text-6xl text-foreground"
+    <div className="relative min-h-svh w-full overflow-hidden bg-[#F1F1F1] dark:bg-[#161616] font-sans text-foreground">
+      <main className="relative z-10 flex min-h-svh flex-col items-center justify-center px-6 py-16 md:px-12 text-center max-w-4xl mx-auto">
+        <div className="flex flex-col items-center space-y-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            {t("title")}
-          </motion.h1>
+            <Image
+              src={logoSrc}
+              alt="Nexus Logo"
+              width={120}
+              height={120}
+              className="h-24 sm:h-28 w-auto"
+              priority
+            />
+          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto"
-          >
-            {t("description")}
-          </motion.p>
+          <div className="space-y-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="font-sans text-3xl font-bold tracking-tight sm:text-5xl text-foreground"
+            >
+              {t("title")}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto"
+            >
+              {t("description")}
+            </motion.p>
+          </div>
+
+          <TooltipProvider>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto pt-4"
+            >
+              {techs.map((tech) => (
+                <Tooltip key={tech} delayDuration={100}>
+                  <TooltipTrigger asChild>
+                    <Image
+                      src={`https://raw.githubusercontent.com/gui-bus/TechIcons/main/${techTheme}/${encodeURIComponent(tech)}.svg`}
+                      alt={tech}
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="h-10 w-10 sm:h-12 sm:w-12 hover:scale-110 transition-transform duration-200 cursor-pointer"
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent
+                    side="top"
+                    variant="flat"
+                    color="default"
+                    className="bg-popover text-popover-foreground border border-border/40 text-xs px-2.5 py-1"
+                  >
+                    {tech}
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </motion.div>
+          </TooltipProvider>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex justify-center pt-4"
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-4 pt-4"
           >
-            <Button
-              size="lg"
-              className="h-12 px-8 rounded-full bg-brand-primary text-white hover:bg-brand-primary/90 transition-all duration-300 font-semibold shadow-md hover:scale-102 active:scale-98 cursor-pointer"
-            >
-              {t("button")}
-            </Button>
+            <LanguageSwitcher />
+            <div className="h-4 w-px bg-border/60" />
+            <ThemeToggle />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-12 w-full max-w-md mx-auto text-center space-y-2"
+          >
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {t("bloomDoc").split("Bloom UI")[0]}
+              <a
+                href="https://bloom.guibus.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brand-primary hover:text-brand-primary/80 transition-colors"
+              >
+                Bloom UI
+              </a>
+              {t("bloomDoc").split("Bloom UI")[1] || "."}
+            </p>
+            <p className="text-xs text-muted-foreground/60 leading-relaxed">
+              {t("cleanupInstruction").split(cleanupCmd)[0]}
+              <code className="px-1.5 py-0.5 rounded bg-muted/60 font-mono text-[10px] border border-border/40">
+                {cleanupCmd}
+              </code>
+              {t("cleanupInstruction").split(cleanupCmd)[1]}
+            </p>
           </motion.div>
         </div>
       </main>

@@ -230,6 +230,13 @@ async function init() {
       }
     }
 
+    const readmePath = join(targetDir, 'README.md');
+    if (existsSync(readmePath)) {
+      let readme = readFileSync(readmePath, 'utf8');
+      readme = readme.replace(/## 📦 Instalação & Uso via CLI[\s\S]*?(?=### Comandos de Desenvolvimento)/, '');
+      writeFileSync(readmePath, readme, 'utf8');
+    }
+
     if (installDeps) {
       console.log(pc.green(`\nInstalando dependências usando o ${packageManager}...`));
       const installCommand = `${packageManager} install`;

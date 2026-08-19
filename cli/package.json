@@ -1,6 +1,6 @@
 {
   "name": "@guibus-nexus/create-nexus",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Scaffold a new Nexus template project",
   "type": "module",
   "main": "./bin/index.js",

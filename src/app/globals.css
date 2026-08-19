@@ -126,11 +126,106 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .tabs-custom {
+    &[data-state="active"] {
+      background-color: var(--tabs-active-bg);
+      border-color: var(--tabs-active-border);
+      color: var(--tabs-active-text);
     }
-  html {
-    @apply font-sans;
-    }
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  transform: scale(0);
+  animation: ripple 600ms ease-out;
+  background-color: currentColor;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+@keyframes growY {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.animate-growY {
+  animation: growY 1s ease-in-out infinite;
+}
+
+@keyframes spin-reverse {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.animate-spin-reverse {
+  animation: spin-reverse 1s linear infinite;
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(10px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(10px) rotate(-360deg);
+  }
+}
+.animate-orbit {
+  animation: orbit 1s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-shimmer {
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    transform: translateX(-100%) scaleX(0.2);
+  }
+  50% {
+    transform: translateX(-10%) scaleX(0.8);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.2);
+  }
+}
+.animate-progress-indeterminate {
+  animation: progress-indeterminate 1.5s infinite linear;
+}
+
+@keyframes stripe-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1rem 0;
+  }
+}
+.animate-stripe-move {
+  animation: stripe-move 1s linear infinite;
 }

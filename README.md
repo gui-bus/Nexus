@@ -28,6 +28,13 @@ pnpm create @guibus-nexus/nexus meu-sistema
 npm create @guibus-nexus/nexus meu-sistema
 ```
 
+A CLI guiará você por um fluxo de perguntas interativo para customizar o seu setup:
+* **Nome do projeto:** Define a pasta e o nome da aplicação.
+* **Internacionalização (i18n):** Escolha se deseja habilitar rotas e traduções com `next-intl`.
+* **Suporte a Docker:** Adicione ou remova configurações de `Dockerfile` e `docker-compose.yml`.
+* **GitHub Actions:** Mantenha ou remova os arquivos de CI/CD para automações no GitHub.
+* **Gerenciador de pacotes:** Selecione entre `pnpm`, `npm`, `yarn` ou `bun` (a CLI fará a instalação automática das dependências caso decida).
+
 ### Comandos de Desenvolvimento
 
 Após criar seu projeto e acessar o diretório, utilize os scripts abaixo para gerenciar a aplicação:

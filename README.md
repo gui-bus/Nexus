@@ -1,16 +1,3 @@
-<div align="center">
-  <br/>
-  <br/>
-  <img src="https://github.com/gui-bus/TechIcons/blob/main/techicons_logo.svg" alt="NEXUS Logo" width="280" />
-  <br/>
-  <br/>
-  <p>
-    🇺🇸 <a href="./README.en.md">English Version</a> | 🇧🇷 <strong>Versão em Português</strong>
-  </p>
-</div>
-
-<br />
-
 ## 🌟 Visão Geral
 
 O **Nexus** é um boilerplate profissional de alta performance e fortemente tipado projetado para o desenvolvimento de sistemas complexos e aplicações web escaláveis. Desenvolvido sobre o ecossistema do React 19 e Next.js 16 (App Router), o template vem pré-configurado com a biblioteca de componentes **Bloom UI**, gerenciamento de estado leve com **Zustand**, sincronização e cache de servidor via **TanStack Query** e formulários validados com **React Hook Form + Zod**.
@@ -134,29 +121,4 @@ graph TB
     
     SubFeature -.->|Validado por| Vitest
     Pages -.->|Testado de ponta a ponta por| Playwright
-```
-
----
-
-## 🧪 Testes & Integração
-
-O ecossistema adota uma cobertura robusta de testes para garantir que alterações na lógica e layouts não causem regressões em produção:
-
-```bash
-# Rodar todos os testes de unidade e componentes com Vitest
-pnpm test
-
-# Rodar todos os testes E2E com Playwright
-pnpm test:e2e
-```
-
----
-
-## 🧹 Script de Limpeza (Strip Comments)
-
-Para manter o código-fonte de produção o mais clean possível e livre de comentários desnecessários, o Nexus fornece um script automatizado de limpeza:
-
-```bash
-# Remove comentários de linha única (//), multilinha (/* */) e JSX ({/* */}) no diretório src/
-pnpm strip
 ```

@@ -6,17 +6,16 @@ import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 
 import { locales } from "@/src/i18n/config"
-import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react"
-import { motion } from "framer-motion"
-import Cookies from "js-cookie"
-import ReactCountryFlag from "react-country-flag"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu"
+} from "@bloomui-react/components"
+import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react"
+import { motion } from "framer-motion"
+import Cookies from "js-cookie"
+import ReactCountryFlag from "react-country-flag"
 
 import { cn } from "@/src/lib/utils/utils"
 

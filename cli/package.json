@@ -1,0 +1,17 @@
+{
+  "name": "@guibus-nexus/create-nexus",
+  "version": "1.0.1",
+  "description": "Scaffold a new Nexus template project",
+  "type": "module",
+  "main": "./bin/index.js",
+  "bin": {
+    "create-nexus": "./bin/index.js"
+  },
+  "files": [
+    "bin"
+  ],
+  "dependencies": {
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2"
+  }
+}

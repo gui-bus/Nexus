@@ -5,7 +5,6 @@ import { cookies } from "next/headers"
 
 import { GoogleAnalytics } from "@next/third-parties/google"
 
-import { CookieConsent } from "@/src/components/common/cookieConsent"
 import { ThemeProvider } from "@/src/components/common/themeProvider"
 
 import { cn } from "@/src/lib/utils/utils"
@@ -110,10 +109,7 @@ export default async function RootLayout({
       </head>
       <body className="mx-auto w-full max-w-440">
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            {children}
-            <CookieConsent />
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
 
         {siteConfig.analytics.google && consent === "accepted" && (

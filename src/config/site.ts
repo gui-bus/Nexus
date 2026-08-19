@@ -1,14 +1,14 @@
 import { env } from "./env"
 
 export const siteConfig = {
-  name: "Landing Page Template",
-  shortName: "LandingTemplate",
+  name: "Nexus Enterprise Boilerplate",
+  shortName: "NexusApp",
   url: env.NEXT_PUBLIC_SITE_URL,
   ogImage: `${env.NEXT_PUBLIC_SITE_URL}/og.png`,
   authors: [
     {
       name: "Guilherme Bustamante",
-      url: "https://github.com/bustamante-gui",
+      url: "https://github.com/gui-bus",
     },
   ],
   creator: "Guilherme Bustamante",

@@ -9,6 +9,11 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/__tests__/setup.tsx"],
     exclude: ["**/node_modules/**", "**/dist/**", "**/src/__tests__/e2e/**"],
+    server: {
+      deps: {
+        inline: ["@bloomui-react/components", "next"],
+      },
+    },
   },
   resolve: {
     alias: {

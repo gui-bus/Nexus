@@ -1,6 +1,6 @@
 {
   "name": "@guibus-nexus/create-nexus",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Scaffold a new Nexus template project",
   "type": "module",
   "main": "./bin/index.js",
@@ -8,8 +8,29 @@
     "create-nexus": "./bin/index.js"
   },
   "files": [
-    "bin"
+    "bin",
+    "README.md"
   ],
+  "keywords": [
+    "nexus",
+    "boilerplate",
+    "nextjs",
+    "react",
+    "bloomui",
+    "template",
+    "scaffold",
+    "create-app"
+  ],
+  "author": "Guilherme Buscardi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gui-bus/Nexus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gui-bus/Nexus/issues"
+  },
+  "homepage": "https://github.com/gui-bus/Nexus#readme",
   "dependencies": {
     "@clack/prompts": "^0.9.1",
     "picocolors": "^1.1.1"

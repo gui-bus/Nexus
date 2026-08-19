@@ -1,80 +1,162 @@
-# 🚀 Next.js Elite Landing Page Template
+<div align="center">
+  <br/>
+  <br/>
+  <img src="https://github.com/gui-bus/TechIcons/blob/main/techicons_logo.svg" alt="NEXUS Logo" width="280" />
+  <br/>
+  <br/>
+  <p>
+    🇺🇸 <a href="./README.en.md">English Version</a> | 🇧🇷 <strong>Versão em Português</strong>
+  </p>
+</div>
 
-A high-performance, production-ready, and strictly typed Landing Page template built with the latest web technologies. This project is engineered for speed, scalability, and professional maintenance.
+<br />
 
-## 🛠 Tech Stack
+## 🌟 Visão Geral
 
-- **Framework:** Next.js 16 (App Router)
-- **Library:** React 19
-- **Styling:** Tailwind CSS v4
-- **Components:** shadcn/ui
-- **Internationalization:** next-intl (Prefix-less routing)
-- **Validation:** Zod
-- **Testing:** Vitest + Playwright + React Testing Library
-- **Logging:** Pino (Structured)
-- **CI/CD:** GitHub Actions
-- **Containerization:** Docker (Multi-stage)
-- **Security:** Secretlint
+O **Nexus** é um boilerplate profissional de alta performance e fortemente tipado projetado para o desenvolvimento de sistemas complexos e aplicações web escaláveis. Desenvolvido sobre o ecossistema do React 19 e Next.js 16 (App Router), o template vem pré-configurado com a biblioteca de componentes **Bloom UI**, gerenciamento de estado leve com **Zustand**, sincronização e cache de servidor via **TanStack Query** e formulários validados com **React Hook Form + Zod**.
 
-## ✨ Key Features
+Toda a arquitetura é estruturada de forma modular orientada a **Features/Módulos**, facilitando a manutenção e garantindo a consistência completa de temas claro/escuro e acessibilidade nativa.
 
-- 🌍 **Full i18n:** Automated translation key synchronization and strict typing.
-- ⚡ **Performance:** Optimized for 100/100 Lighthouse scores with built-in auditing (`pnpm audit`).
-- 🛡️ **Security:** Pre-configured CSP headers and automated secret scanning.
-- 🏗️ **Industrial Scaffolding:** Automated component generation via Plop.js.
-- 🎨 **Dynamic Assets:** On-the-fly Open Graph image generation (`/api/og`).
-- 📱 **PWA Ready:** Manifest and metadata pre-configured for mobile installation.
-- 🧪 **Elite Testing:** 100% coverage strategy with unit, component, and E2E smoke tests.
+---
 
-## 🚀 Getting Started
+## 📦 Instalação & Uso via CLI
 
-### 1. Requirements
-- Node.js 20+
-- pnpm 10+
+<div align="center">
+  <a href="https://github.com/guibus-nexus/create-nexus">
+    <img src="https://img.shields.io/github/actions/workflow/status/gui-bus/Template/ci.yml?branch=main&style=for-the-badge&logo=github&label=Build" alt="CI Build Status" />
+  </a>
+  <a href="https://www.npmjs.com/package/@guibus-nexus/create-nexus">
+    <img src="https://img.shields.io/npm/v/@guibus-nexus/create-nexus?style=for-the-badge&color=cb3837&logo=npm&logoColor=white&label=CLI" alt="CLI Version" />
+  </a>
+</div>
 
-### 2. Installation
+<br />
+
+Você pode criar um novo projeto baseado neste boilerplate instantaneamente utilizando o inicializador CLI oficial do Nexus:
+
 ```bash
+# Inicialize um novo projeto baseado no Nexus
+pnpm create @guibus-nexus/nexus meu-sistema
+# ou
+npm create @guibus-nexus/nexus meu-sistema
+```
+
+### Comandos de Desenvolvimento
+
+Após criar seu projeto e acessar o diretório, utilize os scripts abaixo para gerenciar a aplicação:
+
+```bash
+# Instale as dependências
 pnpm install
-```
 
-### 3. Environment Setup
-```bash
-cp .env.example .env
-# Fill in your variables
-```
-
-### 4. Development
-```bash
+# Inicie o servidor de desenvolvimento
 pnpm dev
+
+# Realize a validação estática de tipos
+pnpm typecheck
+
+# Execute a suíte de testes unitários (Vitest)
+pnpm test
+
+# Execute a suíte de testes E2E (Playwright)
+pnpm test:e2e
+
+# Realize a compilação otimizada para produção
+pnpm build
 ```
 
-## 📜 Mandatory Workflow
+---
 
-Before every commit, the system automatically runs:
-1. `pnpm format` - Organizes imports and styles.
-2. `pnpm check-i18n` - Validates translation sync.
-3. `pnpm test` - Runs unit and component tests.
-4. `pnpm typecheck` - Validates TypeScript integrity.
+## 🛠️ Stack Tecnológica
 
-*A Husky pre-push hook also runs `pnpm build` to ensure production readiness.*
+<div align="center">
+  <img alt="React" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/React.svg">
+  <img alt="NextJS" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/NextJS.svg">
+  <img alt="Typescript" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Typescript.svg">
+  <img alt="TailwindCSS" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/TailwindCSS.svg">
+  <img alt="Bloom" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Bloom.svg">
+  <img alt="Framer Motion" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Framer%20Motion.svg">
+  <img alt="React Hook Form" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/React%20Hook%20Form.svg">
+  <img alt="Zod" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Zod.svg">
+  <img alt="Tanstack" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Tanstack.svg">
+  <img alt="nextintl" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/nextintl.svg">
+  <img alt="pnpm" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/pnpm.svg">
+  <img alt="Vitest" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Vitest.svg">
+  <img alt="Playwright" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Playwright.svg">
+  <img alt="Husky" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Husky.svg">
+  <img alt="Zustand" height="60" width="60" src="https://github.com/gui-bus/TechIcons/blob/main/Dark/Zustand.svg">
+</div>
 
-## 📂 Project Structure
+---
 
-- `src/app/`: Core routing and layouts.
-- `src/components/`: UI, common, and landing page sections.
-- `src/config/`: Centralized site, font, and env configurations.
-- `src/lib/`: Custom hooks, animations, and utilities.
-- `src/__tests__/`: Unit and E2E test suites.
-- `messages/`: Multi-language JSON files.
+## 🏛️ Arquitetura do Sistema
 
-## 📋 New Project Checklist
-See [CHECKLIST.md](./CHECKLIST.md) for a step-by-step guide on starting a new project with this template.
+O Nexus adota o design orientado a **Features (Recursos)** para garantir o isolamento e modularização lógica de cada domínio de negócio:
 
-## 🛠 Scripts
+```mermaid
+graph TB
+    subgraph App ["🌐 Application Core Layout"]
+        Pages["📄 Next.js App Router (app/)"]
+        Provider["⚙️ QueryProvider (React Query client)"]
+        Switcher["🌍 LanguageSwitcher & ThemeToggle (pt/en)"]
+    end
 
-- `pnpm build`: Optimized production build.
-- `pnpm test:e2e`: Run Playwright E2E tests.
-- `pnpm generate`: Scaffolding new components.
-- `pnpm analyze`: Analyze bundle sizes.
-- `pnpm audit`: Site-wide Lighthouse audit.
-- `pnpm clean`: Wipe build artifacts and caches.
+    subgraph Features ["🧩 Features Architecture (features/)"]
+        SubFeature["src/features/<feature-name>/"]
+        FComp["components/ (Exclusive UI)"]
+        FHook["hooks/ (Custom Domain Logic)"]
+        FServ["services/ (API Calls and Mutations)"]
+        FStore["store/ (Zustand Domain State)"]
+        FType["types/ (Domain Type Definitions)"]
+    end
+
+    subgraph Shared ["💎 Shared Global Services"]
+        UI["📦 Bloom UI (@bloomui-react/components)"]
+        GlobalsCSS["globals.css (@theme & CSS Variables)"]
+    end
+
+    subgraph CI ["🧪 Quality Gate"]
+        Vitest["🧪 Vitest (Unit/Component Testing)"]
+        Playwright["🎭 Playwright (E2E Smoke Tests)"]
+    end
+
+    Pages -->|Envolve com| Provider
+    Pages -->|Renderiza| Switcher
+    Pages -->|Importa do ponto de entrada das| SubFeature
+    SubFeature --> FComp
+    SubFeature --> FHook
+    SubFeature --> FServ
+    SubFeature --> FStore
+    SubFeature --> FType
+    
+    FComp -->|Consome componentes globais do| UI
+    Pages -->|Aplica estilos de| GlobalsCSS
+    
+    SubFeature -.->|Validado por| Vitest
+    Pages -.->|Testado de ponta a ponta por| Playwright
+```
+
+---
+
+## 🧪 Testes & Integração
+
+O ecossistema adota uma cobertura robusta de testes para garantir que alterações na lógica e layouts não causem regressões em produção:
+
+```bash
+# Rodar todos os testes de unidade e componentes com Vitest
+pnpm test
+
+# Rodar todos os testes E2E com Playwright
+pnpm test:e2e
+```
+
+---
+
+## 🧹 Script de Limpeza (Strip Comments)
+
+Para manter o código-fonte de produção o mais clean possível e livre de comentários desnecessários, o Nexus fornece um script automatizado de limpeza:
+
+```bash
+# Remove comentários de linha única (//), multilinha (/* */) e JSX ({/* */}) no diretório src/
+pnpm strip
+```

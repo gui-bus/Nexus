@@ -68,7 +68,7 @@ async function init() {
   mkdirSync(targetDir, { recursive: true });
 
   try {
-    const REPO_URL = 'https://github.com/gui-bus/Template.git';
+    const REPO_URL = 'https://github.com/gui-bus/Nexus.git';
     execSync(`git clone --depth 1 ${REPO_URL} "${targetDir}"`, { stdio: 'inherit' });
 
     const gitFolder = join(targetDir, '.git');

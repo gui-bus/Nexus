@@ -2,22 +2,9 @@
 
 O **Nexus** é um boilerplate profissional de alta performance e fortemente tipado projetado para o desenvolvimento de sistemas complexos e aplicações web escaláveis. Desenvolvido sobre o ecossistema do React 19 e Next.js 16 (App Router), o template vem pré-configurado com a biblioteca de componentes **Bloom UI**, gerenciamento de estado leve com **Zustand**, sincronização e cache de servidor via **TanStack Query** e formulários validados com **React Hook Form + Zod**.
 
-Toda a arquitetura é estruturada de forma modular orientada a **Features/Módulos**, facilitando a manutenção e garantindo a consistência completa de temas claro/escuro e acessibilidade nativa.
-
 ---
 
 ## 📦 Instalação & Uso via CLI
-
-<div align="center">
-  <a href="https://github.com/guibus-nexus/create-nexus">
-    <img src="https://img.shields.io/github/actions/workflow/status/gui-bus/Template/ci.yml?branch=main&style=for-the-badge&logo=github&label=Build" alt="CI Build Status" />
-  </a>
-  <a href="https://www.npmjs.com/package/@guibus-nexus/create-nexus">
-    <img src="https://img.shields.io/npm/v/@guibus-nexus/create-nexus?style=for-the-badge&color=cb3837&logo=npm&logoColor=white&label=CLI" alt="CLI Version" />
-  </a>
-</div>
-
-<br />
 
 Você pode criar um novo projeto baseado neste boilerplate instantaneamente utilizando o inicializador CLI oficial do Nexus:
 

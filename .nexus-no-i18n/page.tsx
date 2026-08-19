@@ -2,8 +2,9 @@
 
 import * as React from "react"
 
-import { Button } from "@bloomui-react/components"
 import { motion } from "framer-motion"
+
+import { Button } from "@/src/components/ui/button/button"
 
 import { ThemeToggle } from "@/src/components/common/themeToggle"
 

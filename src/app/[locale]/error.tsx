@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Button } from "@bloomui-react/components"
+import { Button } from "@/src/components/ui/button/button"
 
 interface ErrorProps {
   error: Error & { digest?: string }

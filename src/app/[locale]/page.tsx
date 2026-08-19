@@ -4,8 +4,9 @@ import * as React from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Button } from "@bloomui-react/components"
 import { motion } from "framer-motion"
+
+import { Button } from "@/src/components/ui/button/button"
 
 import { LanguageSwitcher } from "@/src/components/common/languageSwitcher"
 import { ThemeToggle } from "@/src/components/common/themeToggle"

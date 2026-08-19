@@ -3,7 +3,7 @@ import * as React from "react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 
-import { Button } from "@bloomui-react/components"
+import { Button } from "@/src/components/ui/button/button"
 
 export default function NotFound(): React.JSX.Element {
   const t = useTranslations("Errors.not_found")

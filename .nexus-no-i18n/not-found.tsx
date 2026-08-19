@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Link from "next/link"
 
-import { Button } from "@bloomui-react/components"
+import { Button } from "@/src/components/ui/button/button"
 
 export default function NotFound(): React.JSX.Element {
   return (

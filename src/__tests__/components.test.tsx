@@ -1,8 +1,9 @@
 import * as React from "react"
 
-import { Button } from "@bloomui-react/components"
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
+
+import { Button } from "@/src/components/ui/button/button"
 
 describe("Components", () => {
   describe("Button", () => {

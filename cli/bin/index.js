@@ -93,6 +93,11 @@ async function init() {
     const rmCommand = process.platform === 'win32' ? `rmdir /s /q "${gitFolder}"` : `rm -rf "${gitFolder}"`;
     execSync(rmCommand);
 
+    const cliFolder = join(targetDir, 'cli');
+    if (existsSync(cliFolder)) {
+      rmSync(cliFolder, { recursive: true, force: true });
+    }
+
     const cleanupCmdMap = {
       pnpm: 'pnpm cleanup',
       npm: 'npm run cleanup',
@@ -137,7 +142,20 @@ async function init() {
       if (pkJson.dependencies && pkJson.dependencies['next-intl']) {
         delete pkJson.dependencies['next-intl'];
       }
+      if (pkJson.scripts) {
+        if (pkJson.scripts['check-i18n']) {
+          delete pkJson.scripts['check-i18n'];
+        }
+        if (pkJson.scripts['build']) {
+          pkJson.scripts['build'] = 'next build';
+        }
+      }
       writeFileSync(pkJsonPath, JSON.stringify(pkJson, null, 2), 'utf8');
+
+      const checkI18nScript = join(targetDir, 'scripts', 'check-i18n.mjs');
+      if (existsSync(checkI18nScript)) {
+        rmSync(checkI18nScript, { force: true });
+      }
 
       rmSync(join(targetDir, 'messages'), { recursive: true, force: true });
       rmSync(join(targetDir, 'src', 'i18n'), { recursive: true, force: true });

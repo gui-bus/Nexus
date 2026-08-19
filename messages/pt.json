@@ -17,9 +17,9 @@
     "dark": "Escuro"
   },
   "Config": {
-    "name": "Template de Landing Page",
-    "description": "Um template profissional de landing page construído com Next.js, Tailwind CSS e shadcn/ui.",
-    "keywords": "Next.js, React, Tailwind CSS, Server Components, Landing Page, Template"
+    "name": "Nexus App",
+    "description": "Boilerplate corporativo de alta performance baseado em Next.js e Bloom UI.",
+    "keywords": "Next.js, React, Tailwind CSS, Server Components, Boilerplate, Nexus, Bloom UI"
   },
   "CookieConsent": {
     "message": "Usamos cookies para melhorar sua experiência em nosso site.",

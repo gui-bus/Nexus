@@ -21,6 +21,18 @@ async function init() {
       initial: true
     },
     {
+      type: 'confirm',
+      name: 'useDocker',
+      message: 'Deseja incluir suporte a Docker (Dockerfile/Compose)?',
+      initial: true
+    },
+    {
+      type: 'confirm',
+      name: 'useGithubActions',
+      message: 'Deseja incluir automações de CI/CD do GitHub Actions?',
+      initial: true
+    },
+    {
       type: 'select',
       name: 'packageManager',
       message: 'Qual gerenciador de pacotes você deseja usar?',
@@ -40,7 +52,7 @@ async function init() {
     }
   ]);
 
-  const { projectName, useI18n, packageManager, installDeps } = response;
+  const { projectName, useI18n, useDocker, useGithubActions, packageManager, installDeps } = response;
   if (!projectName || !packageManager) {
     return;
   }
@@ -100,6 +112,28 @@ async function init() {
     const backupFolder = join(targetDir, '.nexus-no-i18n');
     if (existsSync(backupFolder)) {
       rmSync(backupFolder, { recursive: true, force: true });
+    }
+
+    if (!useDocker) {
+      console.log(green('\nRemovendo suporte a Docker...'));
+      const dockerfiles = [
+        join(targetDir, 'Dockerfile'),
+        join(targetDir, '.dockerignore'),
+        join(targetDir, 'docker-compose.yml')
+      ];
+      for (const file of dockerfiles) {
+        if (existsSync(file)) {
+          rmSync(file, { force: true });
+        }
+      }
+    }
+
+    if (!useGithubActions) {
+      console.log(green('\nRemovendo fluxos de trabalho do GitHub Actions (CI/CD)...'));
+      const githubFolder = join(targetDir, '.github');
+      if (existsSync(githubFolder)) {
+        rmSync(githubFolder, { recursive: true, force: true });
+      }
     }
 
     if (packageManager !== 'pnpm') {

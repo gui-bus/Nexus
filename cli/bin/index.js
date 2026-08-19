@@ -19,11 +19,29 @@ async function init() {
       name: 'useI18n',
       message: 'Deseja configurar suporte a múltiplos idiomas (i18n)?',
       initial: true
+    },
+    {
+      type: 'select',
+      name: 'packageManager',
+      message: 'Qual gerenciador de pacotes você deseja usar?',
+      choices: [
+        { title: 'pnpm', value: 'pnpm' },
+        { title: 'npm', value: 'npm' },
+        { title: 'yarn', value: 'yarn' },
+        { title: 'bun', value: 'bun' }
+      ],
+      initial: 0
+    },
+    {
+      type: 'confirm',
+      name: 'installDeps',
+      message: 'Deseja instalar as dependências agora?',
+      initial: true
     }
   ]);
 
-  const { projectName, useI18n } = response;
-  if (!projectName) {
+  const { projectName, useI18n, packageManager, installDeps } = response;
+  if (!projectName || !packageManager) {
     return;
   }
 
@@ -84,13 +102,29 @@ async function init() {
       rmSync(backupFolder, { recursive: true, force: true });
     }
 
+    if (packageManager !== 'pnpm') {
+      const lockfile = join(targetDir, 'pnpm-lock.yaml');
+      if (existsSync(lockfile)) {
+        rmSync(lockfile, { force: true });
+      }
+    }
+
+    if (installDeps) {
+      console.log(green(`\nInstalando dependências usando o ${packageManager}...`));
+      const installCommand = `${packageManager} install`;
+      execSync(installCommand, { cwd: targetDir, stdio: 'inherit' });
+    }
+
     execSync('git init', { cwd: targetDir, stdio: 'ignore' });
 
     console.log(green('\nProjeto criado com sucesso!'));
     console.log(`\nExecute os seguintes comandos para começar:\n`);
     console.log(bold(`  cd ${projectName}`));
-    console.log(bold(`  pnpm install`));
-    console.log(bold(`  pnpm dev\n`));
+    if (!installDeps) {
+      console.log(bold(`  ${packageManager} install`));
+    }
+    const devRunCommand = packageManager === 'npm' ? 'npm run dev' : `${packageManager} dev`;
+    console.log(bold(`  ${devRunCommand}\n`));
 
   } catch (error) {
     console.error(red('Ocorreu um erro durante a criação do projeto:'), error);

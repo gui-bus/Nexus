@@ -1,4 +1,4 @@
-import { existsSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, rmSync, writeFileSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 
 const targetDir = process.cwd()
@@ -10,6 +10,17 @@ try {
   if (existsSync(logosDir)) {
     rmSync(logosDir, { recursive: true, force: true })
     console.log("- Logos deletados (/public/logos)")
+  }
+
+  const readmePath = join(targetDir, "README.md")
+  if (existsSync(readmePath)) {
+    const readmeContent = readFileSync(readmePath, "utf8")
+    const updatedReadme = readmeContent.replace(
+      /<div align="center">[\s\S]*?<\/div>\s*<br \/>\s*/,
+      ""
+    )
+    writeFileSync(readmePath, updatedReadme, "utf8")
+    console.log("- Logo do topo removido do README.md")
   }
 
   const barebonesPage = `"use client"

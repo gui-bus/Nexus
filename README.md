@@ -1,3 +1,13 @@
+<div align="center">
+  <br/>
+  <br/>
+  <img src="./public/logos/logo_white.svg" alt="Nexus Logo" width="280" />
+  <br/>
+  <br/>
+</div>
+
+<br />
+
 ## 🌟 Visão Geral
 
 O **Nexus** é um boilerplate profissional de alta performance e fortemente tipado projetado para o desenvolvimento de sistemas complexos e aplicações web escaláveis. Desenvolvido sobre o ecossistema do React 19 e Next.js 16 (App Router), o template vem pré-configurado com a biblioteca de componentes **Bloom UI**, gerenciamento de estado leve com **Zustand**, sincronização e cache de servidor via **TanStack Query** e formulários validados com **React Hook Form + Zod**.

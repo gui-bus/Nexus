@@ -8,13 +8,13 @@ import { type VariantProps, cva } from "class-variance-authority"
 
 import { Ripple } from "@/src/lib/ripple/ripple"
 import { useRipples } from "@/src/lib/ripple/useRipple"
+import { cn } from "@/src/lib/utils/utils"
 
 import {
   designColors,
   designRadius,
   designSizes,
 } from "../../../lib/design-system"
-import { cn } from "../../../lib/utils"
 
 type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl"
 type ButtonRadius =

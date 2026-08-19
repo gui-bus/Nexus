@@ -1,4 +1,4 @@
 {
-  "componentDir": "components/ui",
-  "utilsDir": "lib"
+  "componentDir": "src/components/ui",
+  "utilsDir": "src/lib"
 }
